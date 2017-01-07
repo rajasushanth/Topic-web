@@ -1,0 +1,17 @@
+{"properties": [
+{
+  "name": "rest.service.url",
+  "type": "java.lang.String",
+  "description": "Topic Service endpoint"
+},
+{
+  "name": "rest.client.user",
+  "type": "java.lang.String",
+  "description": "Topic Service user endpoint"
+},
+{
+  "name": "rest.client.user.search",
+  "type": "java.lang.String",
+  "description": "Topic Service user-search endpoint"
+}
+]}
