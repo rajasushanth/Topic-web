@@ -6,12 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(name="/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class LoginContoller {
 	
-	@GetMapping("")
+	@GetMapping("/login")
 	public String login(){
 		return null;
+	}
+	
+	@GetMapping("/index")
+	public String index(){
+		return "index";
 	}
 
 }
