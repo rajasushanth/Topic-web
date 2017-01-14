@@ -36,7 +36,11 @@ public class LoginClient {
 	public LoginClient(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-
+	
+	@Autowired
+	public void setInterceptorList(List<ClientHttpRequestInterceptor> interceptorList) {
+		this.interceptorList = interceptorList;
+	}
 
 	@Value(Constants.REST_ROOT_URL)
 	public void setUrl(String url) {
@@ -51,11 +55,6 @@ public class LoginClient {
 	@Value(Constants.USER_SEARCH)
 	public void setSearchPath(String searchPath) {
 		this.searchPath = searchPath;
-	}
-
-	@Autowired
-	public void setInterceptorList(List<ClientHttpRequestInterceptor> interceptorList) {
-		this.interceptorList = interceptorList;
 	}
 	
 }
