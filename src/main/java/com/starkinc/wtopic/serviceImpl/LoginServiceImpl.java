@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService{
 		boolean isAuthenticated = false; 
 		ResponseEntity<User[]> userEntity = loginClient.getUserByName(name);
 		HttpStatus statusCode = userEntity.getStatusCode();
-		if(statusCode == HttpStatus.OK){
+		if(statusCode == HttpStatus.FOUND){
 			if(null != userEntity.getBody() && null != userEntity.getBody()[0]){
 				User user = userEntity.getBody()[0];
 				if(password.equals(user.getPassword())){

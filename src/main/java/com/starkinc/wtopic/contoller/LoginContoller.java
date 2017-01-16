@@ -27,7 +27,7 @@ public class LoginContoller {
 	@PostMapping("/login")
 	public String login(Model model, @ModelAttribute User user){
 		boolean isAuthenticated = false;
-		String landingPage = "unAuthenticated";
+		String landingPage = "index";
 		if(null != user && 
 				StringUtils.isNotBlank(user.getName()) && StringUtils.isNotBlank(user.getPassword())){
 			isAuthenticated = loginService.validateLogin(user.getName(), user.getPassword());

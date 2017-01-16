@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,7 +10,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Agency - Start Bootstrap Theme</title>
+    <title>Topic - A Discussion forum</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -43,7 +44,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Topic</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,7 +54,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Services</a>
+                        <a class="page-scroll" href="#services">Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
@@ -78,9 +79,9 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To Our Studio!</div>
-                <div class="intro-heading">It's Nice To Meet You</div>
-                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+                <div class="intro-lead-in">Welcome To Topic!</div>
+                <div class="intro-heading">Start discussing now</div>
+                <a href="#services" class="page-scroll btn btn-xl">Let me in</a>
             </div>
         </div>
     </header>
@@ -90,8 +91,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">Login</h2>
+                    <div>
+                    <form action="/login" method="post">
+
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Your username" name="name" required="required" data-validation-required-message="Please enter your username."/>
+                        <p class="help-block text-danger"></p>
+                     </div>                    
+					
+					
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="Your password" name="password" required="required" data-validation-required-message="Please enter your password"/>
+                        <p class="help-block text-danger"></p>
+                     </div>
+                     
+                     <div class="col-lg-12 text-center">
+                        <div id="success"></div>
+                        <button type="submit" class="btn btn-xl">Login</button>
+                     </div>
+
+                    </form>
+                    </div>
                 </div>
             </div>
             <div class="row text-center">
