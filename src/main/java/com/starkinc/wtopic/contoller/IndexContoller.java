@@ -43,9 +43,9 @@ public class IndexContoller {
 			isAuthenticated = loginService.validateLogin(user.getName(), user.getPassword());
 			if(isAuthenticated){
 				landingPage = "redirect:home";
+			}else{
+				model.addAttribute("error", "Invalid credentials");
 			}
-		}else{
-			landingPage = "invalidRequest";
 		}
 		return landingPage;
 	}

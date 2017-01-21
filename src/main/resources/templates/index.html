@@ -54,7 +54,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Login</a>
+                        <a class="page-scroll" href="#login">Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
@@ -81,41 +81,40 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome To Topic!</div>
                 <div class="intro-heading">Start discussing now</div>
-                <a href="#services" class="page-scroll btn btn-xl">Let me in</a>
+                <a href="#login" id="loginId" class="page-scroll btn btn-xl">Let me in</a>
             </div>
         </div>
     </header>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="login">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Login</h2>
-                    <div>
+            <div class="row justify-content-center" style="background-image: url('../img/portfolio/login_bg.png'); 
+            background-repeat:no-repeat; background-position:center; padding-bottom: 5%">
+            <br/><br/>
+                    <h2 class="section-heading text-center">Login</h2>
+                     <div class="col-lg-12 text-center">
+                     <label th:if="${error != null}" th:text="${error}" class="alert alert-danger" style="text-align: center;">
+                     </label>
                     <form action="/login" method="post">
 
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Your username" name="name" required="required" data-validation-required-message="Please enter your username."/>
+						<input type="text" class="form-control" placeholder="Your username" name="name" 
+						required="required" data-validation-required-message="Please enter your username." style="display: inline; width: 30%"/>
                         <p class="help-block text-danger"></p>
-                     </div>                    
 					
 					
-					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Your password" name="password" required="required" data-validation-required-message="Please enter your password"/>
+						<input type="password" class="form-control" placeholder="Your password" name="password" 
+						required="required" data-validation-required-message="Please enter your password" style="display: inline; width: 30%"/>
                         <p class="help-block text-danger"></p>
-                     </div>
-                     
-                     <div class="col-lg-12 text-center">
+                     	<br/>
+                    	
                         <div id="success"></div>
                         <button type="submit" class="btn btn-xl">Login</button>
+                     </form>
                      </div>
 
-                    </form>
-                    </div>
-                </div>
             </div>
-            <div class="row text-center">
+            <div class="row text-center" style="padding-top: 10%">
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
@@ -685,6 +684,13 @@
 
     <!-- Theme JavaScript -->
     <script src="js/agency.min.js"></script>
+     
+    <script type="text/javascript" th:if="${error != null}">
+    $(document).ready(function(){
+    	var href = $('#loginId').attr('href');
+        window.location.href = href;
+    });
+    </script>
 
 </body>
 
