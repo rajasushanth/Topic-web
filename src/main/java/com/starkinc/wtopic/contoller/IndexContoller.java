@@ -15,13 +15,23 @@ import com.starkinc.wtopic.service.LoginService;
 
 @Controller
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class LoginContoller {
+public class IndexContoller {
 	
 	private LoginService loginService;
 	
 	@GetMapping("/")
 	public String index(){
 		return "index";
+	}
+	
+	@GetMapping("/home")
+	public String home(){
+		return "home";
+	}
+	
+	@GetMapping("/logoutnow")
+	public String logout(){
+		return "redirect:/";
 	}
 	
 	@PostMapping("/login")
@@ -32,16 +42,16 @@ public class LoginContoller {
 				StringUtils.isNotBlank(user.getName()) && StringUtils.isNotBlank(user.getPassword())){
 			isAuthenticated = loginService.validateLogin(user.getName(), user.getPassword());
 			if(isAuthenticated){
-				landingPage = "home";
+				landingPage = "redirect:home";
 			}
 		}else{
 			landingPage = "invalidRequest";
 		}
 		return landingPage;
 	}
-
+	
 	@Autowired
-	public LoginContoller(LoginService loginService) {
+	public IndexContoller(LoginService loginService) {
 		this.loginService = loginService;
 	}
 	
