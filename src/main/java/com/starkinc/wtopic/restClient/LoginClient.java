@@ -1,18 +1,15 @@
 package com.starkinc.wtopic.restClient;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.starkinc.wtopic.constants.Constants;
-import com.starkinc.wtopic.entity.User;
+import com.starkinc.wtopic.entity.TopicUser;
 
 @Service
 public class LoginClient {
@@ -20,15 +17,16 @@ public class LoginClient {
 	private RestTemplate restTemplate;
 	private String url;
 	private String userPath;
-	private String searchPath;
 	private List<ClientHttpRequestInterceptor> interceptorList;
+	private TextEncryptor textEncryptor;
 	
-	public ResponseEntity<User[]> getUserByName(String name){
-		Map<String, String> params = new HashMap<>();
-		params.put(Constants.USERNAME, name);
-		final String searchUserUrl = url + userPath + searchPath; 
+	public ResponseEntity<TopicUser[]> attemptLogin(String name, String password) {
+		final String searchUserUrl = url + userPath; 
 		restTemplate.setInterceptors(interceptorList);
-		return restTemplate.getForEntity(searchUserUrl, User[].class, params);
+		TopicUser user = new TopicUser();
+		user.setUsername(name);
+		user.setPassword(textEncryptor.encrypt(password));
+		return restTemplate.postForEntity(searchUserUrl, user, TopicUser[].class); 
 	}
 	
 	
@@ -41,20 +39,20 @@ public class LoginClient {
 	public void setInterceptorList(List<ClientHttpRequestInterceptor> interceptorList) {
 		this.interceptorList = interceptorList;
 	}
+	
+	@Autowired
+	public void setTextEncryptor(TextEncryptor textEncryptor) {
+		this.textEncryptor = textEncryptor;
+	}
 
-	@Value(Constants.REST_ROOT_URL)
+	@Value(Constants.BASE_URL)
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	@Value(Constants.USER_CLIENT)
+	@Value(Constants.USER_RESOURCE)
 	public void setUserPath(String userPath) {
 		this.userPath = userPath;
 	}
 
-	@Value(Constants.USER_SEARCH)
-	public void setSearchPath(String searchPath) {
-		this.searchPath = searchPath;
-	}
-	
 }
