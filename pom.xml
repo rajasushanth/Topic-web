@@ -67,6 +67,12 @@
     		<version>2.5</version>
 		</dependency>
 		
+	<!-- Rest template error handling -->
+		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpclient</artifactId>
+    		</dependency>
+		
 		
 			<!-- Added externally for actuators -->
 		<!-- Tool great for monitoring application (beans, health and etc) -->

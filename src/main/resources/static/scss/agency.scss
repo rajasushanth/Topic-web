@@ -562,22 +562,22 @@ section#contact {
     ::-webkit-input-placeholder {
        @include heading-font;
        font-weight: 700;
-       color: $gray-lighter;
+       color: $gray-darker;
     }
     :-moz-placeholder { /* Firefox 18- */
        @include heading-font;
        font-weight: 700;
-       color: $gray-lighter;
+       color: $gray-darker;
     }
     ::-moz-placeholder {  /* Firefox 19+ */
        @include heading-font;
        font-weight: 700;
-       color: $gray-lighter;
+       color: $gray-darker;
     }
     :-ms-input-placeholder {  
        @include heading-font;
        font-weight: 700;
-       color: $gray-lighter;
+       color: $gray-darker;
     }
     .text-danger {
         color: $theme-danger;

@@ -44,6 +44,15 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 		request.getSession().setAttribute("temp", "pass");
 		redirectStrategy.sendRedirect(request, response, "home");
 	}
+	
+	
+
+	@Override
+	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException failed) throws IOException, ServletException {
+		request.getSession().setAttribute("failureMessage", failed.getMessage());
+		redirectStrategy.sendRedirect(request, response, "");
+	}
 
 	private String concatUserPassword(String userName, String password) {
 		return userName + Constants.TILT + password;

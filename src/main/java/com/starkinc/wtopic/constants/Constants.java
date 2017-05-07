@@ -3,6 +3,7 @@ package com.starkinc.wtopic.constants;
 public final class Constants {
 	
 	public static final String BASE_URL = "${rest.client.url.base}";
+	public static final String LOGIN = "${rest.client.resource.user.login}";
 	public static final String USER_RESOURCE = "${rest.client.resource.user}";
 	public static final String USERNAME = "username";
 	public static final String CONTENT_TYPE = "Content-Type";
@@ -14,6 +15,7 @@ public final class Constants {
 	public static final String TILT = "~";
 	public static final String PASSWORD_PLACEHOLDER = "SIUAKJ5365";
 	public static final String ROLE_USER = "ROLE_USER";
+	public static final String HEADER_STRING = "${header.string}"  ;
 	
 	private Constants(){
 	}
