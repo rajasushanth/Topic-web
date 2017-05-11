@@ -1,12 +1,11 @@
 package com.starkinc.wtopic.service;
 
-import org.springframework.stereotype.Service;
+import java.util.Map;
 
 import com.starkinc.wtopic.entity.TopicUser;
 
-@Service
 public interface SignUpService {
 	
-	public String signUp(TopicUser user);
+	public Map<String, String> signUp(TopicUser user);
 
 }

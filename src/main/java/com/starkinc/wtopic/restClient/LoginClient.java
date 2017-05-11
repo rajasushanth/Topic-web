@@ -30,7 +30,7 @@ public class LoginClient {
 		} catch (TopicException e) {
 			resposneEntity = ResponseEntity
 					.status(e.getHttpStatus())
-					.header("errorMessage", e.getMessage())
+					.header("loginErrorMessage", e.getMessage())
 					.body(null);
 		}
 		return resposneEntity; 

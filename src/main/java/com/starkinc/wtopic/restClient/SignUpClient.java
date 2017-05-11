@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
+import com.starkinc.wtopic.exception.TopicException;
 
 @Service
 public class SignUpClient {
@@ -18,7 +19,16 @@ public class SignUpClient {
 	
 	public ResponseEntity<Object> signUp(TopicUser user){
 		final String saveuser = url + userPath;
-		return restTemplate.postForEntity(saveuser, user, Object.class);
+		ResponseEntity<Object> resposneEntity = null;
+		try{
+			resposneEntity = restTemplate.postForEntity(saveuser, user, Object.class);
+		}catch (TopicException e) {
+			resposneEntity = ResponseEntity
+					.status(e.getHttpStatus())
+					.header("signUpErrorMessage", e.getMessage())
+					.body(null);
+		}
+		return resposneEntity;
 	}
 	
 	@Autowired

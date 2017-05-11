@@ -46,7 +46,7 @@ public class LoginDetailsService implements UserDetailsService {
 			return new User(usernameWithPassord, Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
 		}else if(statusCode == UNAUTHORIZED){
 			HttpHeaders httpHeaders = userEntity.getHeaders();
-			String error = (null == httpHeaders)? null: httpHeaders.getFirst("errorMessage");
+			String error = (null == httpHeaders)? null: httpHeaders.getFirst("loginErrorMessage");
 			if(null != error && error.contains("disabled")){
 				return new User(userName, Constants.PASSWORD_PLACEHOLDER, false, true, true, true, authorities);
 			}
