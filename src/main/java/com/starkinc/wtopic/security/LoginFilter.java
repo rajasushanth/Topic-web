@@ -41,7 +41,8 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		request.getSession().setAttribute("temp", "pass");
+		String token = getUnparsedToken(authResult.getName());
+		request.getSession().setAttribute("token", token);
 		redirectStrategy.sendRedirect(request, response, "home");
 	}
 	
@@ -57,6 +58,10 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	private String concatUserPassword(String userName, String password) {
 		return userName + Constants.TILT + password;
 
+	}
+	
+	private String getUnparsedToken(String usernamePasswordToken){
+		return usernamePasswordToken.split(Constants.TILT)[2];
 	}
 
 }

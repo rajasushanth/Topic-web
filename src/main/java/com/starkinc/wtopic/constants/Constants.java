@@ -15,7 +15,7 @@ public final class Constants {
 	public static final String TILT = "~";
 	public static final String PASSWORD_PLACEHOLDER = "SIUAKJ5365";
 	public static final String ROLE_USER = "ROLE_USER";
-	public static final String HEADER_STRING = "${header.string}"  ;
+	public static final String HEADER_STRING = "${header.string}";
 	
 	private Constants(){
 	}

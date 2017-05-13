@@ -2,7 +2,7 @@ package com.starkinc.wtopic.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import static org.springframework.http.HttpMethod.POST;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,8 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll()
 		.antMatchers("/css/**", "/js/**", "/img/**", "/less/**", "/scss/**", "/vendor/**", "/mail/**").permitAll()
 		.antMatchers("/actuator/**").permitAll()
-		.antMatchers(HttpMethod.POST, "/login").permitAll()
-		.antMatchers(HttpMethod.POST, "/signUp").permitAll()
+		.antMatchers(POST, "/login").permitAll()
+		.antMatchers(POST, "/signUp").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.addFilterBefore(new LoginFilter("/login", authenticationManager()) , UsernamePasswordAuthenticationFilter.class)

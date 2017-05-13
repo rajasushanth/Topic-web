@@ -40,10 +40,10 @@ public class LoginDetailsService implements UserDetailsService {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority(Constants.ROLE_USER));
 		if(statusCode == OK){
-			List<String> authorization = headers.get("Authorization");
-			System.out.println(authorization.get(0));
-			
-			return new User(usernameWithPassord, Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
+			List<String> authorizationList = headers.get("Authorization");
+			String token = null != authorizationList ? authorizationList.get(0) : null;
+			System.out.println(token);
+			return new User(getParsedToken(usernameWithPassord, token), Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
 		}else if(statusCode == UNAUTHORIZED){
 			HttpHeaders httpHeaders = userEntity.getHeaders();
 			String error = (null == httpHeaders)? null: httpHeaders.getFirst("loginErrorMessage");
@@ -59,6 +59,10 @@ public class LoginDetailsService implements UserDetailsService {
 	@Autowired
 	public void setLoginClient(LoginClient loginClient) {
 		this.loginClient = loginClient;
+	}
+	
+	private String getParsedToken(String usernameWithPassord, String token){
+		return usernameWithPassord + Constants.TILT + token;
 	}
 
 }
