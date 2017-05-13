@@ -420,7 +420,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Sign Up</h2>
-                    <h3 class="section-subheading text-muted">Join us and share your thoughts.</h3>
+                    <!-- <h3 class="section-subheading text-muted">Join us and share your thoughts.</h3> -->
                 </div>
             </div>
             <div class="row">
@@ -428,7 +428,7 @@
                     <form name="sentMessage" id="signUpForm" novalidate="novalidate" action="/signUp" method="post">
                         <div class="row">
                         		<div align="center">
-                        			<label th:if="${error != null}" th:text="${error}" class="alert alert-danger" style="text-align: center;"></label>
+                        			<label th:if="${signUpError != null}" th:text="${signUpError}" class="alert alert-danger" style="text-align: center;"></label>
                         		</div>
                                 <div class="form-group" align="center">
                                     <input type="text" class="form-control" placeholder="Username" name="username" id="name" required="required" data-validation-required-message="Please enter your name." style="height: 50px; width: 40%; "/>
@@ -685,7 +685,7 @@
     	$('#login').scrollView();
     });
     </script>
-    <script type="text/javascript" th:if="${error != null}">
+    <script type="text/javascript" th:if="${signUpError != null}">
     $(document).ready(function(){
     	$('#contact').scrollView();
     });

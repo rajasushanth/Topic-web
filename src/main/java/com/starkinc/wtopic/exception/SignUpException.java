@@ -2,19 +2,15 @@ package com.starkinc.wtopic.exception;
 
 import org.springframework.http.HttpStatus;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class TopicException extends RuntimeException {
+public class SignUpException extends RuntimeException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3826781453318629546L;
 	
 	private String message;
 	private HttpStatus httpStatus;
-	
 	public String getMessage() {
 		return message;
 	}
@@ -25,6 +21,11 @@ public class TopicException extends RuntimeException {
 		return httpStatus;
 	}
 	public void setHttpStatus(HttpStatus httpStatus) {
+		this.httpStatus = httpStatus;
+	}
+	public SignUpException(String message, HttpStatus httpStatus) {
+		super();
+		this.message = message;
 		this.httpStatus = httpStatus;
 	}
 	

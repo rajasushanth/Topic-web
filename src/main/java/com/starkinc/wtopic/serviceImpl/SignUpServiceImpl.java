@@ -2,9 +2,6 @@ package com.starkinc.wtopic.serviceImpl;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -24,19 +21,15 @@ public class SignUpServiceImpl implements SignUpService {
 	private TextEncryptor textEncryptor;
 
 	@Override
-	public Map<String, String> signUp(TopicUser user) {
+	public String signUp(TopicUser user) {
 		String token = null;
 		String encryptedPassword = textEncryptor.encrypt(user.getPassword());
 		user.setPassword(encryptedPassword);
 		ResponseEntity<Object> entity = signUpClient.signUp(user);
-		Map<String, String> responseMap = new HashMap<>();
 		if(entity.getStatusCode() == CREATED){
 			token = entity.getHeaders().getFirst(headerPrefix);
-			responseMap.put("token", token);
-		}else {
-			responseMap.put("error", entity.getHeaders().getFirst("signUpErrorMessage"));
 		}
-		return responseMap;
+		return token;
 	}
 	
 	@Autowired

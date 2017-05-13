@@ -22,7 +22,7 @@ public class CustomResponseErrorHandler implements ResponseErrorHandler {
 	@Override
 	public void handleError(ClientHttpResponse response) throws IOException {
 		String resposeBody = IOUtils.toString(response.getBody(), "UTF-8");
-		TopicException topicException = objectMapper.readValue(resposeBody, TopicException.class);
+		ClientResponseException topicException = objectMapper.readValue(resposeBody, ClientResponseException.class);
 		topicException.setHttpStatus(response.getStatusCode());
 		throw topicException;
 	}

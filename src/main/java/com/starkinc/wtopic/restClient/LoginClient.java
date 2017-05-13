@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
-import com.starkinc.wtopic.exception.TopicException;
+import com.starkinc.wtopic.exception.ClientResponseException;
 
 @Service
 public class LoginClient {
@@ -27,7 +27,7 @@ public class LoginClient {
 		ResponseEntity<TopicUser[]> resposneEntity = null;
 		try {
 			resposneEntity = restTemplate.postForEntity(loginUrl, user, TopicUser[].class);
-		} catch (TopicException e) {
+		} catch (ClientResponseException e) {
 			resposneEntity = ResponseEntity
 					.status(e.getHttpStatus())
 					.header("loginErrorMessage", e.getMessage())
