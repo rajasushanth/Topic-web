@@ -18,6 +18,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.entity.UserSession;
 
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	
@@ -41,8 +42,9 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
-		String token = getUnparsedToken(authResult.getName());
-		request.getSession().setAttribute("token", token);
+		String [] unFormattedCreds = unFormatCreds(authResult.getName());
+		UserSession userSession = new UserSession(unFormattedCreds[2], unFormattedCreds[0], null);
+		request.getSession().setAttribute(Constants.USER_SESSION, userSession);
 		redirectStrategy.sendRedirect(request, response, "home");
 	}
 	
@@ -60,8 +62,8 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	}
 	
-	private String getUnparsedToken(String usernamePasswordToken){
-		return usernamePasswordToken.split(Constants.TILT)[2];
+	private String[] unFormatCreds(String usernamePasswordToken){
+		return usernamePasswordToken.split(Constants.TILT);
 	}
 
 }

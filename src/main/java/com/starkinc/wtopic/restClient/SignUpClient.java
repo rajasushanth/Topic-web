@@ -24,7 +24,7 @@ public class SignUpClient {
 		try {
 			resposneEntity = restTemplate.postForEntity(saveuser, user, Object.class);
 		} catch (ClientResponseException e) {
-			throw new SignUpException(e.getMessage(), e.getHttpStatus());
+			throw new SignUpException(e);
 		}
 		return resposneEntity;
 	}

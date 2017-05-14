@@ -43,7 +43,7 @@ public class LoginDetailsService implements UserDetailsService {
 			List<String> authorizationList = headers.get("Authorization");
 			String token = null != authorizationList ? authorizationList.get(0) : null;
 			System.out.println(token);
-			return new User(getParsedToken(usernameWithPassord, token), Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
+			return new User(formatCreds(usernameWithPassord, token), Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
 		}else if(statusCode == UNAUTHORIZED){
 			HttpHeaders httpHeaders = userEntity.getHeaders();
 			String error = (null == httpHeaders)? null: httpHeaders.getFirst("loginErrorMessage");
@@ -61,7 +61,7 @@ public class LoginDetailsService implements UserDetailsService {
 		this.loginClient = loginClient;
 	}
 	
-	private String getParsedToken(String usernameWithPassord, String token){
+	private String formatCreds(String usernameWithPassord, String token){
 		return usernameWithPassord + Constants.TILT + token;
 	}
 

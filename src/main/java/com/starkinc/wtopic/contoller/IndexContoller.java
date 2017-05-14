@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
+import com.starkinc.wtopic.entity.UserSession;
 import com.starkinc.wtopic.exception.SignUpException;
 import com.starkinc.wtopic.serviceImpl.SignUpServiceImpl;;
 
@@ -32,7 +34,8 @@ public class IndexContoller {
 	@RequestMapping(value = "/signUp", method = POST)
 	public String signUp(TopicUser user, HttpServletRequest request, RedirectAttributes redirectAttrs){
 		String token = signUpServiceImpl.signUp(user);
-		request.getSession().setAttribute("token", token);
+		UserSession userSession = new UserSession(token, user.getUsername(), null);
+		request.getSession().setAttribute(Constants.USER_SESSION, userSession);
 		return "home";
 	}
 	
@@ -47,9 +50,9 @@ public class IndexContoller {
 		return "redirect:/";
 	}
 	
-	@ExceptionHandler(Exception.class)
-	public String handleIndexControllerException(RedirectAttributes redirectAttrs, Exception ex){
-		redirectAttrs.addFlashAttribute("generalError", ex.getMessage());
+	@ExceptionHandler(Throwable.class)
+	public String handleIndexControllerException(RedirectAttributes redirectAttrs, Throwable th){
+		redirectAttrs.addFlashAttribute("generalError", th.getMessage());
 		return "redirect:/";
 	}
 	

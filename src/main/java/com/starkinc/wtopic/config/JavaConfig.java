@@ -3,12 +3,7 @@ package com.starkinc.wtopic.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.SessionCookieConfig;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -29,6 +24,7 @@ public class JavaConfig {
 		RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 		restTemplate.setInterceptors(clientHttpRequestInterceptorList());
 		restTemplate.setErrorHandler(customResponseErrorHandler());
+		//restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		return restTemplate;
 	}
 	
@@ -47,20 +43,6 @@ public class JavaConfig {
 	@Bean
 	public CustomResponseErrorHandler customResponseErrorHandler(){
 		return new CustomResponseErrorHandler();
-	}
-	
-	@Bean
-	public ServletContextInitializer servletContextInitializer() {
-	    return new ServletContextInitializer() {
-
-	        @Override
-	        public void onStartup(ServletContext servletContext) throws ServletException {
-	            SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
-	            sessionCookieConfig.setMaxAge(-1);
-	            sessionCookieConfig.setSecure(true);
-	        }
-	    };
-
 	}
 
 }

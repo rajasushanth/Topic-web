@@ -26,6 +26,16 @@ public class ClientResponseException extends RuntimeException {
 	public void setHttpStatus(HttpStatus httpStatus) {
 		this.httpStatus = httpStatus;
 	}
+	public ClientResponseException(String message, HttpStatus httpStatus) {
+		super();
+		this.message = message;
+		this.httpStatus = httpStatus;
+	}
+	public ClientResponseException() {
+		super();
+	}
+	
+	
 	
 
 }

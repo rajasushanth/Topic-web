@@ -8,11 +8,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.entity.UserSession;
+
 public class AuthenticationService {
 
 	public static Authentication getAuthentication(HttpServletRequest req) {
-		String token = (String)req.getSession().getAttribute("token");
-		if(StringUtils.isNotBlank(token)){
+		UserSession userSession = (UserSession)req.getSession().getAttribute(Constants.USER_SESSION);
+		if(null != userSession && StringUtils.isNotBlank(userSession.getToken()) && StringUtils.isNoneBlank(userSession.getUsername())){
 			return new UsernamePasswordAuthenticationToken(req.getParameterMap(), null, Collections.emptyList());
 		}
 		return null;

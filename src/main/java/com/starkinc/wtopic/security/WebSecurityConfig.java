@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.addFilterBefore(new LoginFilter("/login", authenticationManager()) , UsernamePasswordAuthenticationFilter.class)
 		.addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-		.logout().logoutSuccessUrl("/") .invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID")
+		.logout().logoutSuccessUrl("/") .invalidateHttpSession(true).clearAuthentication(true).deleteCookies("TOPIC_SESSSION_ID")
 		.and()
 		.httpBasic().disable();
 	}
