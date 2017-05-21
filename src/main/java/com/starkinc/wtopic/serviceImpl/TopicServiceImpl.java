@@ -1,12 +1,12 @@
 package com.starkinc.wtopic.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.CREATED;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.starkinc.wtopic.entity.Topic;
-import com.starkinc.wtopic.entity.UserSession;
 import com.starkinc.wtopic.restClient.TopicClient;
 import com.starkinc.wtopic.service.TopicService;
 
@@ -16,8 +16,8 @@ public class TopicServiceImpl implements TopicService {
 	private TopicClient topicClient;
 
 	@Override
-	public Topic createTopic(Topic topic, UserSession userSession) {
-		ResponseEntity<Topic> topicEntity = topicClient.createTopic(topic, userSession);
+	public Topic createTopic(Topic topic) {
+		ResponseEntity<Topic> topicEntity = topicClient.createTopic(topic);
 		Topic topicResponse = null;
 		if(null != topicEntity && topicEntity.getStatusCode() == CREATED){
 			topicResponse = topicEntity.getBody();
@@ -26,8 +26,8 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public Topic updateTopic(Topic topic) {
-		// TODO Auto-generated method stub
+	public Topic updateTopic(String topicName, String firstMessage) {
+		topicClient.updateTopic(topicName, firstMessage);
 		return null;
 	}
 	
@@ -35,6 +35,7 @@ public class TopicServiceImpl implements TopicService {
 	public void setTopicClient(TopicClient topicClient) {
 		this.topicClient = topicClient;
 	}
+
 	
 	
 

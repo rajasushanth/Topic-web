@@ -3,17 +3,18 @@ package com.starkinc.wtopic.restClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.entity.Message;
 import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.entity.UserSession;
 import com.starkinc.wtopic.exception.ClientResponseException;
 import com.starkinc.wtopic.exception.TopicException;
+import com.starkinc.wtopic.util.TopicWebUtils;
 
 @Service
 public class TopicClient {
@@ -23,17 +24,34 @@ public class TopicClient {
 	private String topicResourcePath;
 	
 	
-	public ResponseEntity<Topic> createTopic(Topic topic, UserSession userSession){
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-		headers.add("Authorization", userSession.getToken());
+	public ResponseEntity<Topic> createTopic(Topic topic){
+		ResponseEntity<Topic> responseEntity = null;
+		UserSession userSession = TopicWebUtils.getCurrentUserSession();
+		String token = userSession.getToken();
 		topic.setAuthor(userSession.getUsername());
-		HttpEntity<Topic> entity = new HttpEntity<Topic>(topic, headers);
+		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(topic, token);
 		try{
-			
+			responseEntity = restTemplate.postForEntity(baseURL + topicResourcePath, entity, Topic.class);
 		}catch (ClientResponseException e) {
 			throw new TopicException(e);
 		}
-		return restTemplate.postForEntity(baseURL + topicResourcePath, entity, Topic.class);
+		return responseEntity;
+	}
+	
+	public ResponseEntity<Topic> updateTopic(String topicName, String firstMessage){
+		UserSession userSession = TopicWebUtils.getCurrentUserSession();
+		String token = userSession.getToken();
+		Message message = new Message();
+		message.setMessage(firstMessage);
+		message.setCommentator(userSession.getUsername());
+		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(message, token);
+		ResponseEntity<Topic> topic = null;
+		try {
+			topic = restTemplate.exchange(baseURL + topicResourcePath + "/" +topicName, HttpMethod.PUT, entity, Topic.class);
+		} catch (ClientResponseException e) {
+			e.printStackTrace();
+		}
+		return topic;
 	}
 	
 	@Autowired
