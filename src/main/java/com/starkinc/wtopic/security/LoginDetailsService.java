@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.restClient.LoginClient;
+import com.starkinc.wtopic.util.TopicWebUtils;
 
 @Service
 public class LoginDetailsService implements UserDetailsService {
@@ -30,8 +31,8 @@ public class LoginDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String usernameWithPassord) throws UsernameNotFoundException {
 		String[] splitted = usernameWithPassord.split("~");
-		String userName = splitted[0], password = splitted[1];
-		ResponseEntity<TopicUser[]> userEntity = loginClient.attemptLogin(userName, password);
+		String username = splitted[0], password = splitted[1];
+		ResponseEntity<TopicUser[]> userEntity = loginClient.attemptLogin(username, password);
 		HttpStatus statusCode = null;
 		HttpHeaders headers = null;
 		if(null != userEntity){
@@ -43,26 +44,23 @@ public class LoginDetailsService implements UserDetailsService {
 			List<String> authorizationList = headers.get("Authorization");
 			String token = null != authorizationList ? authorizationList.get(0) : null;
 			System.out.println(token);
-			return new User(formatCreds(usernameWithPassord, token), Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
+			TopicWebUtils.bindUserSession(username, token);
+			return new User(username, Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
 		}else if(statusCode == UNAUTHORIZED){
 			HttpHeaders httpHeaders = userEntity.getHeaders();
 			String error = (null == httpHeaders)? null: httpHeaders.getFirst("loginErrorMessage");
 			if(null != error && error.contains("disabled")){
-				return new User(userName, Constants.PASSWORD_PLACEHOLDER, false, true, true, true, authorities);
+				return new User(username, Constants.PASSWORD_PLACEHOLDER, false, true, true, true, authorities);
 			}
 		}
 	}
 
-		throw new UsernameNotFoundException("User "+ userName + " not found");
+		throw new UsernameNotFoundException("User "+ username + " not found");
 	}
 	
 	@Autowired
 	public void setLoginClient(LoginClient loginClient) {
 		this.loginClient = loginClient;
-	}
-	
-	private String formatCreds(String usernameWithPassord, String token){
-		return usernameWithPassord + Constants.TILT + token;
 	}
 
 }
