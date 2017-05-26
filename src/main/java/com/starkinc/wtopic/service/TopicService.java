@@ -6,5 +6,6 @@ public interface TopicService {
 	
 	public Topic createTopic(Topic topic);
 	public Topic updateTopic(String topicName, String firstMessage);
+	public Topic getTopicByName(String topicname);
 
 }

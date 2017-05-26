@@ -33,4 +33,8 @@ public abstract class TopicWebUtils {
 		UserSession userSession = new UserSession(token, username, null);
 		request.getSession().setAttribute(Constants.USER_SESSION, userSession);
 	}
+	
+	public static String appendPath(String base, String path){
+		return base + Constants.SLASH + path;
+	}
 }

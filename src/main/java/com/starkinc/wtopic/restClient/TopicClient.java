@@ -47,11 +47,20 @@ public class TopicClient {
 		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(message, token);
 		ResponseEntity<Topic> topic = null;
 		try {
-			topic = restTemplate.exchange(baseURL + topicResourcePath + "/" +topicName, HttpMethod.PUT, entity, Topic.class);
+			topic = restTemplate.exchange(TopicWebUtils.appendPath(baseURL + topicResourcePath, topicName), HttpMethod.PUT, entity, Topic.class);
 		} catch (ClientResponseException e) {
 			e.printStackTrace();
 		}
 		return topic;
+	}
+	
+	public ResponseEntity<Topic> getTopicByName(String topicName){
+		UserSession userSession = TopicWebUtils.getCurrentUserSession();
+		String token = userSession.getToken();
+		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(null, token);
+		ResponseEntity<Topic> responseEntity = restTemplate.exchange(TopicWebUtils.appendPath(baseURL + topicResourcePath, topicName),
+				HttpMethod.GET, entity,Topic.class);
+		return responseEntity;
 	}
 	
 	@Autowired
@@ -68,8 +77,5 @@ public class TopicClient {
 	public void setPath(String topicResourcePath) {
 		this.topicResourcePath = topicResourcePath;
 	}
-	
-	
-	
 
 }

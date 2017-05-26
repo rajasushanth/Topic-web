@@ -19,6 +19,10 @@ public final class Constants {
 	public static final String HEADER_STRING = "${header.string}";
 	
 	public static final String USER_SESSION = "USER_SESSION";
+	public static final String SLASH = "/";
+	public static final String MESSAGES = "messages";
+	public static final String IS_CREATED = "isCreated";
+	public static final String TOPIC_NAME = "topicName";
 	
 	private Constants(){
 	}
