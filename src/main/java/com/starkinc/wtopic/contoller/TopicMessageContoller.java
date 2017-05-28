@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.Message;
 import com.starkinc.wtopic.entity.Topic;
+import com.starkinc.wtopic.exception.TopicException;
 import com.starkinc.wtopic.service.TopicService;
 import com.starkinc.wtopic.util.TopicWebUtils;
 
@@ -34,6 +36,10 @@ public class TopicMessageContoller {
 		this.topicService = topicService;
 	}
 	
-	
+	@ExceptionHandler(TopicException.class)
+	public String handleTopicException(RedirectAttributes redirectAttrs, TopicException ex){
+		redirectAttrs.addFlashAttribute(Constants.TOPIC_ERROR, ex.getMessage());
+		return "redirect:/home";
+	}
 
 }

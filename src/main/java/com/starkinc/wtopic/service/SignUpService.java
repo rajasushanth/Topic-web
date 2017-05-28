@@ -4,6 +4,6 @@ import com.starkinc.wtopic.entity.TopicUser;
 
 public interface SignUpService {
 	
-	public String signUp(TopicUser user);
+	public void signUp(TopicUser user);
 
 }

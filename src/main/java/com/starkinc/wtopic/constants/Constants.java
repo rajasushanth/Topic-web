@@ -23,7 +23,15 @@ public final class Constants {
 	public static final String MESSAGES = "messages";
 	public static final String IS_CREATED = "isCreated";
 	public static final String TOPIC_NAME = "topicName";
-	
+	public static final String TOPIC_ERROR = "topicError";
+	public static final String NO_RECORD_FOUND = "No record found";
+	public static final String TOPIC_NOT_FOUND = "Topic * not found";
+	public static final String BY_AUTHOR = "${rest.client.resource.topics.byAuthor}"; 
+	public static final String SYMBOL_QUESTION = "?";
+	public static final String SYMBOL_AMPERSAND = "&";
+	public static final String SYMBOL_EQUAL_TO = "=";
+	public static final String AUTHOR = "author";
+	public static final String SKIP = "skip";
 	private Constants(){
 	}
 }

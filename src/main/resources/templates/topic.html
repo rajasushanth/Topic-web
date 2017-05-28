@@ -31,6 +31,52 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <style type="text/css">
+    .topic-message-container{
+    overflow-y: auto;
+    height:235px; 
+    max-width:55%; 
+    margin: auto;
+    }
+	.topic-message:nth-child(odd){
+	/* padding-left: 10%; */
+	}
+	.topic-message:nth-child(even){
+	padding-left: 15%;
+	}
+	.topic-caption{
+	padding-bottom: 16px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.8141em;
+	}
+	.topic-message-even{
+	background-color: #F0F8FF;
+	width: 500px;
+	font-family: Montserrat,"Hel	vetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.92em;
+	padding-left: 4px;
+	padding-top: 2.4px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-radius: 12px;
+	border-top-left-radius: 0px;
+	resize: none;
+	}
+	.topic-message-odd{
+	background-color: #FFFFF0;
+	width: 500px;
+	font-family: sans-serif;
+	font-size: 0.92em;
+	padding-left: 4px;
+	padding-top: 2.4px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-radius: 10px;
+	border-top-right-radius: 0px;
+	resize: none;
+	}
+	</style>  
 
 </head>
 
@@ -80,19 +126,24 @@
                     </h2>
                 </div>
             </div>
-            <div class="row" style="padding-top: 20px;"></div>
-            <div class="row" style="padding-top: 20px;" th:if="${null != messages}">
-            	<div th:each="message, index : ${messages}">
-            		<span th:text="${message.message}"></span>
+            <div class="row topic-message-container" style="padding-top: 5px;" th:if="${null != messages}">
+            	<div th:each="message,iter : ${messages}" class="topic-message">
+            		<textarea th:text="${message.message}" rows="2" disabled="disabled" th:class="${iter.index % 2 == 0} ? 'topic-message-even': 'topic-message-odd'"></textarea>
+            		<div class="topic-caption">
+            		<span th:text="${message.commentator} +' | '+ ${#dates.format(message.posted,'h:m a MMM dd yyyy')}"></span>
+            		</div>
             	</div>
             </div>
+            <div class="row" style="padding-top: 90px;" th:if="${null == messages}"></div>
             <div class="row">
             <form th:action="@{/topic}" th:method="put" novalidate="novalidate">
             	<input type="hidden" th:value="${topicName}" name="topicName"></input>
                 <div class="col-lg-12 text-center">
-                    <textarea name="firstMessage" rows="10" cols="100" spellcheck="true" style="border-radius: 5px; resize: none;"></textarea>
+                    <textarea name="firstMessage" rows="4" cols="55" spellcheck="true" style="border-radius: 5px; resize: none;"></textarea>
                     <br></br><br></br>
-                <button type="submit" class="btn btn-xl" >Post message</button>
+                <div class="col-lg-12 text-center">
+                	<button type="submit" class="btn btn-xl" style="padding: 8px 18px;">Post message</button>
+                </div>
                 </div>
                 </form>
             </div>

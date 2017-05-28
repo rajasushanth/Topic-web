@@ -2,6 +2,9 @@ package com.starkinc.wtopic.serviceImpl;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.FOUND;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +49,22 @@ public class TopicServiceImpl implements TopicService {
 		}
 		return topicResponse;
 	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public List<String> getTopicsByAuthor(int skip) {
+		ResponseEntity<List> topicEntity =  topicClient.getTopicsByAuthor(skip);
+		List<String> topicList = null;
+		if(null != topicEntity && topicEntity.getStatusCode() == FOUND){
+			topicList = topicEntity.getBody();
+		}
+		return topicList;
+	}
 
 	@Autowired
 	public void setTopicClient(TopicClient topicClient) {
 		this.topicClient = topicClient;
 	}
-	
+
 
 }

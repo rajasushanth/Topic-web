@@ -1,5 +1,7 @@
 package com.starkinc.wtopic.restClient;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -22,6 +24,7 @@ public class TopicClient {
 	private RestTemplate restTemplate;
 	private String baseURL;
 	private String topicResourcePath;
+	private String byAuthor;
 	
 	
 	public ResponseEntity<Topic> createTopic(Topic topic){
@@ -49,7 +52,7 @@ public class TopicClient {
 		try {
 			topic = restTemplate.exchange(TopicWebUtils.appendPath(baseURL + topicResourcePath, topicName), HttpMethod.PUT, entity, Topic.class);
 		} catch (ClientResponseException e) {
-			e.printStackTrace();
+			throw new TopicException(e);
 		}
 		return topic;
 	}
@@ -58,8 +61,32 @@ public class TopicClient {
 		UserSession userSession = TopicWebUtils.getCurrentUserSession();
 		String token = userSession.getToken();
 		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(null, token);
-		ResponseEntity<Topic> responseEntity = restTemplate.exchange(TopicWebUtils.appendPath(baseURL + topicResourcePath, topicName),
-				HttpMethod.GET, entity,Topic.class);
+		ResponseEntity<Topic> responseEntity = null;
+		try{
+			responseEntity = restTemplate.exchange(TopicWebUtils.appendPath(baseURL + topicResourcePath, topicName),
+					HttpMethod.GET, entity,Topic.class);
+		}catch (ClientResponseException e) {
+			if(Constants.NO_RECORD_FOUND.equalsIgnoreCase(e.getMessage())){
+				throw new TopicException(Constants.TOPIC_NOT_FOUND.replace("*", topicName));
+			}
+			throw new TopicException(e);
+		}
+		return responseEntity;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public ResponseEntity<List> getTopicsByAuthor(int skip){
+		UserSession userSession = TopicWebUtils.getCurrentUserSession();
+		String token = userSession.getToken();
+		String author = userSession.getUsername();
+		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(null, token);
+		ResponseEntity<List> responseEntity = null;
+		try {
+			responseEntity = restTemplate.exchange(TopicWebUtils.appendQuery(baseURL + topicResourcePath + byAuthor, author, skip),
+					HttpMethod.GET, entity, List.class);
+		} catch (ClientResponseException e) {
+			throw new TopicException(e);
+		}
 		return responseEntity;
 	}
 	
@@ -77,5 +104,12 @@ public class TopicClient {
 	public void setPath(String topicResourcePath) {
 		this.topicResourcePath = topicResourcePath;
 	}
+	
+	@Value(Constants.BY_AUTHOR)
+	public void setByAuthor(String byAuthor) {
+		this.byAuthor = byAuthor;
+	}
+	
+	
 
 }

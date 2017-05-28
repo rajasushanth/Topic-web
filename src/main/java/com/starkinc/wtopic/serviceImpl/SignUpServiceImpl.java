@@ -12,6 +12,7 @@ import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.restClient.SignUpClient;
 import com.starkinc.wtopic.service.SignUpService;
+import com.starkinc.wtopic.util.TopicWebUtils;
 
 @Service
 public class SignUpServiceImpl implements SignUpService {
@@ -21,15 +22,16 @@ public class SignUpServiceImpl implements SignUpService {
 	private TextEncryptor textEncryptor;
 
 	@Override
-	public String signUp(TopicUser user) {
+	public void signUp(TopicUser user) {
 		String token = null;
 		String encryptedPassword = textEncryptor.encrypt(user.getPassword());
 		user.setPassword(encryptedPassword);
 		ResponseEntity<Object> entity = signUpClient.signUp(user);
 		if(entity.getStatusCode() == CREATED){
+			String username = user.getUsername();
 			token = entity.getHeaders().getFirst(headerPrefix);
+			TopicWebUtils.bindUserSession(username, token);
 		}
-		return token;
 	}
 	
 	@Autowired

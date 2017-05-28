@@ -14,5 +14,9 @@ public class TopicException extends ClientResponseException {
 	public TopicException(ClientResponseException e) {
 		super(e.getMessage(), e.getHttpStatus());
 	}
+	
+	public TopicException(String message){
+		super(message);
+	}
 
 }

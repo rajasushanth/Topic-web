@@ -80,8 +80,8 @@ public class HomeController {
 	
 	@ExceptionHandler(TopicException.class)
 	public String handleTopicException(RedirectAttributes redirectAttrs, TopicException ex){
-		redirectAttrs.addAttribute("topicError", ex.getMessage());
-		return "";
+		redirectAttrs.addFlashAttribute(Constants.TOPIC_ERROR, ex.getMessage());
+		return "redirect:/home";
 	}
 
 }

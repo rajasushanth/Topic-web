@@ -34,6 +34,10 @@ public class ClientResponseException extends RuntimeException {
 	public ClientResponseException() {
 		super();
 	}
+	public ClientResponseException(String message) {
+		super();
+		this.message = message;
+	}
 	
 	
 	

@@ -37,4 +37,11 @@ public abstract class TopicWebUtils {
 	public static String appendPath(String base, String path){
 		return base + Constants.SLASH + path;
 	}
+	
+	public static String appendQuery(String base, String author, int skip){
+		return base + Constants.SYMBOL_QUESTION + 
+				Constants.AUTHOR + Constants.SYMBOL_EQUAL_TO + author +
+				Constants.SYMBOL_AMPERSAND +
+				Constants.SKIP + Constants.SYMBOL_EQUAL_TO + skip;
+	}
 }

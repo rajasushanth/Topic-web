@@ -425,24 +425,32 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="signUpForm" novalidate="novalidate" action="/signUp" method="post">
+                    <form name="sentMessage" id="contactForm" action="/signUp" method="post">
                         <div class="row">
-                        		<div align="center">
+                        	<div align="center">
                         			<label th:if="${signUpError != null}" th:text="${signUpError}" class="alert alert-danger" style="text-align: center;"></label>
                         		</div>
+                        	<div class="col-md-6">
                                 <div class="form-group" align="center">
-                                    <input type="text" class="form-control" placeholder="Username" name="username" id="name" required="required" data-validation-required-message="Please enter your name." style="height: 55px; width: 40%; "/>
-                                    <p class="help-block text-danger"></p>
+                                    <input type="text" class="form-control" placeholder="Username" name="username" id="name" required="required" data-validation-required-message="Please enter your name." style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
                                 </div>
                                 <div class="form-group" align="center">
-                                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="required" data-validation-required-message="Please enter your password." style="height: 55px; width: 40%;"/>
-                                    <p class="help-block text-danger"></p>
+                                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="required" data-validation-required-message="Please enter your password." style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="form-group" align="center">
+                                    <input type="text" class="form-control" placeholder="Recovery question" id="question" required="required" data-validation-required-message="Please enter your question" style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
                                 </div>
                                 <div class="form-group" align="center">
-                                    <input type="password" class="form-control" placeholder="Re enter Password" id="confirmPassword" required="required" data-validation-required-message="Please re-enter your password." style="height: 55px; width: 40%;"/>
-                                    <p class="help-block text-danger"></p>
+                                    <input type="text" class="form-control" placeholder="Answer" id="answer" required="required" data-validation-required-message="Please enter your awswer" style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
                                 </div>
                             <div class="clearfix"></div>
+                            </div>
                         </div>
                         <div class="col-lg-12 text-center">
                     	<div id="success"></div>
