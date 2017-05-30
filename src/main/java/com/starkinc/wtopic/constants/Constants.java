@@ -32,6 +32,7 @@ public final class Constants {
 	public static final String SYMBOL_EQUAL_TO = "=";
 	public static final String AUTHOR = "author";
 	public static final String SKIP = "skip";
+	public static final String TOPIC_NAME_LIST = "topicNameList";
 	private Constants(){
 	}
 }

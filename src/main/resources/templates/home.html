@@ -11,6 +11,19 @@
     <meta name="author" content=""/>
 
     <title>Topic - Home</title>
+    
+    <style type="text/css">
+    #topicName{
+    	width: 100%;
+    	background-color: #7bbbff;
+    	border-color: #5c55e1;
+    }
+    
+    #topicName:hover{
+    	background-color: #99dba0;
+    	border-color: #41a35f;
+    }
+    </style>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
@@ -44,7 +57,8 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Topic</a>
+                <a class="navbar-brand page-scroll" href="#page-top" th:if="${null != #httpServletRequest and null != #httpServletRequest.getSession() and null != #httpServletRequest.getSession().getAttribute('USER_SESSION')}" th:text="'Hi '+${#httpServletRequest.getSession().getAttribute('USER_SESSION').getUsername()}"></a>
+                <a class="navbar-brand page-scroll" href="#page-top" th:if="${null == #httpServletRequest or null == #httpServletRequest.getSession() or null == #httpServletRequest.getSession().getAttribute('USER_SESSION')}" th:text="'Topic'"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,54 +105,11 @@
     <!-- Services Section -->
     <section id="services">
         <div class="container">
+        	<h2 class="section-heading col-lg-12 text-center" style="margin-bottom: 3px;">Recent Topics</h2>
+        	<h3 class="section-subheading text-muted col-lg-12 text-center" style="margin-bottom: 0px; padding-bottom: 50px;">Topic's created by you</h3>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">E-Commerce</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Responsive Design</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                </div>
-                                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Web Security</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                <div class="col-md-3" th:each="topicName, iter :${topicNameList}" style="padding-bottom: 40px;">
+                    <a th:href="'/topic/' + ${topicName}" class="btn btn-xl" th:text="${topicName}" id="topicName"></a>
                 </div>
             </div>
         </div>
