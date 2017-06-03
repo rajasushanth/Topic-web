@@ -23,6 +23,38 @@
     	background-color: #99dba0;
     	border-color: #41a35f;
     }
+    .inactiveNavg {
+   	pointer-events: none;
+   	cursor: default;
+	}
+	
+	.inactiveNavg.previous,
+	.inactiveNavg.next{
+	background-color: white;
+	color: black;
+	border-color: black;	
+	}
+	
+	a.activeNavg:HOVER,
+	a.inactiveNavg:HOVER{
+		color: white;
+		text-decoration: none;
+		-webkit-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+		box-shadow: 4px 4px 18px 0px rgba(0,0,0,0.75);
+	}
+	
+	.next,
+	.previous{
+	display: inline-block;
+    padding: 8px 16px;
+    border: solid thin;
+    border-color: #4CAF50;
+   	background-color: #4CAF50;
+	color: white;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+	
     </style>
 
     <!-- Bootstrap Core CSS -->
@@ -96,21 +128,35 @@
 		<div class="container">
 		<h2 class="section-heading text-center">Error occurred !</h2>
 			<div class="row text-center">
-				<div class="col-lg-12" th:if="${topicError != null}" style="padding-top: 60px;">
-				<label th:text="${topicError}" class="alert alert-danger" style="text-align: center;"></label>
+				<div class="col-lg-12" th:if="${topicError != null}" style="padding-top: 30px;">
+				<label th:text="${topicError}" class="alert alert-danger" style="text-align: center; margin-top: 7%;"></label>
 				</div>
 			</div>
 		</div>
 	</section>
     <!-- Services Section -->
     <section id="services">
-        <div class="container">
+        <div class="container"> 
         	<h2 class="section-heading col-lg-12 text-center" style="margin-bottom: 3px;">Recent Topics</h2>
+        	<div th:if="${null != topicDTO and null != topicDTO.topics and !topicDTO.topics.isEmpty()}">
         	<h3 class="section-subheading text-muted col-lg-12 text-center" style="margin-bottom: 0px; padding-bottom: 50px;">Topic's created by you</h3>
             <div class="row text-center">
-                <div class="col-md-3" th:each="topicName, iter :${topicNameList}" style="padding-bottom: 40px;">
-                    <a th:href="'/topic/' + ${topicName}" class="btn btn-xl" th:text="${topicName}" id="topicName"></a>
+                <div class="col-md-3" th:each="topic, iter :${topicDTO.topics}" style="padding-bottom: 40px;">
+                    <a th:href="'/topic/' + ${topic.topicName}" class="btn btn-xl" th:text="${topic.topicName}" id="topicName"></a>
                 </div>
+                <div class="col-lg-12" th:if="${topicDTO.topics.size() &lt;= 6}" style="padding-top: 9%;"></div>
+            </div>
+            <div class="col-lg-12">
+            	<div class="col-lg-6" align="left">
+            		<a th:class="${topicDTO.isFirst() ? 'inactiveNavg':'activeNavg'} + ' previous'" th:href="'/home?page=' + ${topicDTO.page -1}">❮ Previous</a>
+            	</div>
+            	<div class="col-lg-6" align="right">
+            		<a th:class="${topicDTO.isLast() ? 'inactiveNavg':'activeNavg'} + ' next'" th:href="'/home?page=' + ${topicDTO.page +1}">Next ❯</a>
+            	</div>
+            </div>
+            </div>
+            <div th:if="${null == topicDTO or null == topicDTO.topics or topicDTO.topics.isEmpty()}" style="padding-bottom: 15%; margin-top: 15%;">
+            	<h3 class="section-subheading text-muted col-lg-12 text-center" style="margin-bottom: 0px; padding-bottom: 50px; font-size: 21px;">You haven't started any Topic, Start now !!</h3>
             </div>
         </div>
   

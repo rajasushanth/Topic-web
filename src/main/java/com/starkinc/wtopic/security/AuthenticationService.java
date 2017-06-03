@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 
 import com.starkinc.wtopic.constants.Constants;
-import com.starkinc.wtopic.entity.UserSession;
+import com.starkinc.wtopic.dto.UserSession;
 
 public class AuthenticationService {
 

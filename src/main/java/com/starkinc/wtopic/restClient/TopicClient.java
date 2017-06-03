@@ -1,7 +1,5 @@
 package com.starkinc.wtopic.restClient;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -11,9 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.dto.TopicsDTO;
+import com.starkinc.wtopic.dto.UserSession;
 import com.starkinc.wtopic.entity.Message;
 import com.starkinc.wtopic.entity.Topic;
-import com.starkinc.wtopic.entity.UserSession;
 import com.starkinc.wtopic.exception.ClientResponseException;
 import com.starkinc.wtopic.exception.TopicException;
 import com.starkinc.wtopic.util.TopicWebUtils;
@@ -74,16 +73,15 @@ public class TopicClient {
 		return responseEntity;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public ResponseEntity<List> getTopicsByAuthor(int skip){
+	public ResponseEntity<TopicsDTO> getTopicsByAuthor(int skip){
 		UserSession userSession = TopicWebUtils.getCurrentUserSession();
 		String token = userSession.getToken();
 		String author = userSession.getUsername();
 		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(null, token);
-		ResponseEntity<List> responseEntity = null;
+		ResponseEntity<TopicsDTO> responseEntity = null;
 		try {
 			responseEntity = restTemplate.exchange(TopicWebUtils.appendQuery(baseURL + topicResourcePath + byAuthor, author, skip),
-					HttpMethod.GET, entity, List.class);
+					HttpMethod.GET, entity, TopicsDTO.class);
 		} catch (ClientResponseException e) {
 			throw new TopicException(e);
 		}

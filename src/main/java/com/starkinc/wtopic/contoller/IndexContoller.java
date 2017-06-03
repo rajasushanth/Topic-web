@@ -2,8 +2,6 @@ package com.starkinc.wtopic.contoller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.exception.SignUpException;
 import com.starkinc.wtopic.service.TopicService;
@@ -33,8 +32,8 @@ public class IndexContoller {
 	
 	@RequestMapping("/home")
 	public String home(Model model, @RequestParam(value = "page", required = false) Integer page){
-		List<String> topicNameList = topicService.getTopicsByAuthor(page==null?0:page);
-		model.addAttribute(Constants.TOPIC_NAME_LIST, topicNameList);
+		TopicsDTO topicsDTO = topicService.getTopicsByAuthor(page==null?1:page);
+		model.addAttribute(Constants.TOPIC_DTO, topicsDTO);
 		return "home";
 	}
 	

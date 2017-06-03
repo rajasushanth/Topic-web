@@ -9,7 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.starkinc.wtopic.constants.Constants;
-import com.starkinc.wtopic.entity.UserSession;
+import com.starkinc.wtopic.dto.UserSession;
 
 public abstract class TopicWebUtils {
 

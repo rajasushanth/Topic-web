@@ -1,16 +1,14 @@
 package com.starkinc.wtopic.serviceImpl;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
-
-import java.util.List;
-
 import static org.springframework.http.HttpStatus.FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.restClient.TopicClient;
 import com.starkinc.wtopic.service.TopicService;
@@ -50,15 +48,14 @@ public class TopicServiceImpl implements TopicService {
 		return topicResponse;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<String> getTopicsByAuthor(int skip) {
-		ResponseEntity<List> topicEntity =  topicClient.getTopicsByAuthor(skip);
-		List<String> topicList = null;
+	public TopicsDTO getTopicsByAuthor(int skip) {
+		ResponseEntity<TopicsDTO> topicEntity =  topicClient.getTopicsByAuthor(skip);
+		TopicsDTO topicsDTO = null;
 		if(null != topicEntity && topicEntity.getStatusCode() == FOUND){
-			topicList = topicEntity.getBody();
+			topicsDTO = topicEntity.getBody();
 		}
-		return topicList;
+		return topicsDTO;
 	}
 
 	@Autowired

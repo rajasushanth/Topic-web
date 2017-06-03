@@ -1,4 +1,4 @@
-package com.starkinc.wtopic.entity;
+package com.starkinc.wtopic.dto;
 
 public class UserSession {
 	
