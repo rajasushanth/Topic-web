@@ -13,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.dto.SearchDTO;
 import com.starkinc.wtopic.entity.Message;
 import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.exception.TopicException;
@@ -62,6 +64,15 @@ public class HomeController {
 			request.setAttribute(Constants.MESSAGES, messages);
 		}
 		return "topic";
+	}
+	
+	@RequestMapping(value = "/topic/search")
+	public String searchTopic(RedirectAttributes redirectAttributes, @RequestParam(required = false) String author,
+			@RequestParam(required = false) String topicName, @RequestParam(required = false) Integer page){
+		SearchDTO searchDTORequest = new SearchDTO(author, topicName);
+		SearchDTO searchDTO = topicService.getTopicsByAuthorAndTopicName(searchDTORequest, page==null?1:page);
+		redirectAttributes.addFlashAttribute(Constants.SEARCH_DTO, searchDTO);
+		return "redirect:/home";
 	}
 
 	private List<Message> getTopicByName(String topicName) {

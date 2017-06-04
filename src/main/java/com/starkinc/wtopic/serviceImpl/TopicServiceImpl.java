@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.starkinc.wtopic.dto.SearchDTO;
 import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.restClient.TopicClient;
@@ -57,11 +58,22 @@ public class TopicServiceImpl implements TopicService {
 		}
 		return topicsDTO;
 	}
+	
+	@Override
+	public SearchDTO getTopicsByAuthorAndTopicName(SearchDTO searchDTO, int skip) {
+		ResponseEntity<SearchDTO> searchEntity = topicClient.searchTopics(searchDTO, skip);
+		SearchDTO searchDTOResponse = null;
+		if(null != searchEntity && searchEntity.getStatusCode() == FOUND){
+			searchDTOResponse = searchEntity.getBody();
+		}
+		return searchDTOResponse;
+	}
 
 	@Autowired
 	public void setTopicClient(TopicClient topicClient) {
 		this.topicClient = topicClient;
 	}
+
 
 
 }

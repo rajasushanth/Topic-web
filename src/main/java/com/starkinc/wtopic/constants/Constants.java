@@ -33,6 +33,8 @@ public final class Constants {
 	public static final String AUTHOR = "author";
 	public static final String SKIP = "skip";
 	public static final String TOPIC_DTO = "topicDTO";
+	public static final String SEARCH = "${rest.client.resource.topics.search}";
+	public static final String SEARCH_DTO = "searchDTO";
 	private Constants(){
 	}
 }

@@ -31,7 +31,7 @@ public class IndexContoller {
 	}
 	
 	@RequestMapping("/home")
-	public String home(Model model, @RequestParam(value = "page", required = false) Integer page){
+	public String home(Model model, @RequestParam(required = false) Integer page){
 		TopicsDTO topicsDTO = topicService.getTopicsByAuthor(page==null?1:page);
 		model.addAttribute(Constants.TOPIC_DTO, topicsDTO);
 		return "home";

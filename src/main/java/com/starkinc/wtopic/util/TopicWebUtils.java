@@ -44,4 +44,9 @@ public abstract class TopicWebUtils {
 				Constants.SYMBOL_AMPERSAND +
 				Constants.SKIP + Constants.SYMBOL_EQUAL_TO + skip;
 	}
+	
+	public static String appendQuery(String base, int skip){
+		return base + Constants.SYMBOL_QUESTION + 
+				Constants.SKIP + Constants.SYMBOL_EQUAL_TO + skip;
+	}
 }

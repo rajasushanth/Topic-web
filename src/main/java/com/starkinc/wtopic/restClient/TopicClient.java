@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.starkinc.wtopic.constants.Constants;
+import com.starkinc.wtopic.dto.SearchDTO;
 import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.dto.UserSession;
 import com.starkinc.wtopic.entity.Message;
@@ -24,7 +25,7 @@ public class TopicClient {
 	private String baseURL;
 	private String topicResourcePath;
 	private String byAuthor;
-	
+	private String search;
 	
 	public ResponseEntity<Topic> createTopic(Topic topic){
 		ResponseEntity<Topic> responseEntity = null;
@@ -88,6 +89,20 @@ public class TopicClient {
 		return responseEntity;
 	}
 	
+	public ResponseEntity<SearchDTO> searchTopics(SearchDTO searchDTO, int skip){
+		UserSession userSession = TopicWebUtils.getCurrentUserSession();
+		String token = userSession.getToken();
+		HttpEntity<Object> entity = TopicWebUtils.buildEntityWithToken(searchDTO, token);
+		ResponseEntity<SearchDTO> responseEntity = null;
+		try {
+			responseEntity = restTemplate.exchange(TopicWebUtils.appendQuery(baseURL + topicResourcePath + search,skip),
+					HttpMethod.POST, entity, SearchDTO.class);
+		} catch (ClientResponseException e) {
+			throw new TopicException(e);
+		}
+		return responseEntity;
+	}
+	
 	@Autowired
 	public void setRestTemplate(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -107,7 +122,10 @@ public class TopicClient {
 	public void setByAuthor(String byAuthor) {
 		this.byAuthor = byAuthor;
 	}
-	
-	
+
+	@Value(Constants.SEARCH)
+	public void setSearch(String search) {
+		this.search = search;
+	}
 
 }
