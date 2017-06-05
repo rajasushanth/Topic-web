@@ -146,13 +146,15 @@
                 </div>
                 <div class="col-lg-12" th:if="${topicDTO.topics.size() &lt;= 6}" style="padding-top: 9%;"></div>
             </div>
-            <div class="col-lg-12">
-            	<div class="col-lg-6" align="left">
+            <div class="row">
+            <div class="col-lg-12 col-xs-12">
+            	<div class="col-lg-6 col-xs-6" align="left">
             		<a th:class="${topicDTO.isFirst() ? 'inactiveNavg':'activeNavg'} + ' previous'" th:href="'/home?page=' + ${topicDTO.page -1}">❮ Previous</a>
             	</div>
-            	<div class="col-lg-6" align="right">
+            	<div class="col-lg-6 col-xs-6" align="right">
             		<a th:class="${topicDTO.isLast() ? 'inactiveNavg':'activeNavg'} + ' next'" th:href="'/home?page=' + ${topicDTO.page +1}">Next ❯</a>
             	</div>
+            </div>
             </div>
             </div>
             <div th:if="${null == topicDTO or null == topicDTO.topics or topicDTO.topics.isEmpty()}" style="padding-bottom: 15%; margin-top: 15%;">
@@ -192,6 +194,7 @@
                     <h2 class="section-heading">Search</h2>
                 </div>
             </div>
+            <div class="row" style="padding-top: 3%;"></div>
             <div class="row">
             	<div class="col-lg-12 text-center" th:if="${null == searchDTO}">
             	<form id="searchForm" action="/topic/search" method="get">
@@ -216,7 +219,6 @@
             	</div>
             </div>
             <div class="row">
-            	<div class="col-lg-12 text-center">
             	<div class="col-lg-12 text-center" th:if="${null != searchDTO}">
             		<form id="searchForm" action="/topic/search" method="get">
             			<div class="col-lg-4" style="padding-bottom: 2%;">
@@ -230,13 +232,26 @@
             			</div>
             		</form>
             	</div>
+            	<div class="row" style="padding-top: 7%;"></div>
                 <div class="row text-center" th:if="${null != searchDTO and null != searchDTO.topicsDTO and null != searchDTO.topicsDTO.getTopics() and !searchDTO.topicsDTO.getTopics().isEmpty()}">
                 	<div class="col-md-3" th:each="topic, iter :${searchDTO.topicsDTO.getTopics()}" style="padding-bottom: 40px;">
                     	<a th:href="'/topic/' + ${topic.topicName}" class="btn btn-xl" th:text="${topic.topicName}" id="topicName"></a>
                     </div>
                     <div class="col-lg-12" th:if="${searchDTO.topicsDTO.getTopics().size() &lt;= 6}" style="padding-top: 9%;"></div>
-            	</div>
-            	</div>
+            	<div class="row">
+            	<div class="col-lg-12 col-xs-12">
+            		<div class="col-lg-6 col-xs-6" align="left">
+            			<a th:class="${searchDTO.getTopicsDTO().isFirst() ? 'inactiveNavg':'activeNavg'} + ' previous'" th:href="'/topic/search?' + 'author=' + ${searchDTO.getAuthor()} + '&amp;topicName=' + ${searchDTO.getTopicName()} + '&amp;page=' + ${searchDTO.getTopicsDTO().getPage() -1}">❮ Previous</a>
+            		</div>
+            		<div class="col-lg-6 col-xs-6" align="right">
+            			<a th:class="${searchDTO.getTopicsDTO().isLast() ? 'inactiveNavg':'activeNavg'} + ' next'" th:href="'/topic/search?' + 'author=' + ${searchDTO.getAuthor()} + '&amp;topicName=' + ${searchDTO.getTopicName()} + '&amp;page=' + ${searchDTO.getTopicsDTO().getPage() +1}">Next ❯</a>
+            		</div>
+           		</div>
+           		</div>
+            </div>
+             <div class="row text-center" th:if="${null != searchDTO and (null == searchDTO.topicsDTO or null != searchDTO.topicsDTO.getTopics() or !searchDTO.topicsDTO.getTopics().isEmpty())}">
+             	<h3 class="section-subheading text-muted col-lg-12 text-center" style="margin-bottom: 0px; padding-bottom: 50px; font-size: 21px;">Your search didn't match any Topic !!</h3>
+             </div>
             </div>
         </div>
     </section>
@@ -606,6 +621,13 @@
 
     <!-- Theme JavaScript -->
     <script src="/js/agency.min.js"></script>
+    <script src="/js/scrollview.js"></script>
+    
+     <script type="text/javascript" th:if="${null != searchDTO}">
+    $(document).ready(function(){
+    	$('#about').scrollView();
+    });
+    </script>
 
 </body>
 
