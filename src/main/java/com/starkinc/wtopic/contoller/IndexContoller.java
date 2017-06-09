@@ -30,6 +30,11 @@ public class IndexContoller {
 		return "index";
 	}
 	
+	@RequestMapping("/recover")
+	public String getSecurityQuestion(@RequestParam(required = false) String username){
+		return null;
+	}
+	
 	@RequestMapping("/home")
 	public String home(Model model, @RequestParam(required = false) Integer page){
 		TopicsDTO topicsDTO = topicService.getTopicsByAuthor(page==null?1:page);
