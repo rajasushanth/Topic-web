@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.dto.SearchDTO;
+import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.entity.Message;
 import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.exception.TopicException;
@@ -28,15 +30,27 @@ import com.starkinc.wtopic.util.TopicWebUtils;;;
 @Controller
 public class HomeController {
 	
-	private TopicService topicService; 
+	private TopicService topicService;
+	
+	
+	@RequestMapping("/home")
+	public String home(Model model, @RequestParam(required = false) Integer page){
+		TopicsDTO topicsDTO = topicService.getTopicsByAuthor((page==null || page < 1)?1:page);
+		model.addAttribute(Constants.TOPIC_DTO, topicsDTO);
+		return "home";
+	}
 	
 	@RequestMapping(value="/topic", method = POST)
 	public String createTopic(Topic topic, RedirectAttributes redirectAttrs){
-		Topic topicResponse = topicService.createTopic(topic);
-		String topicName = topicResponse.getTopicName();
-		redirectAttrs.addFlashAttribute(Constants.TOPIC_NAME, topicName);
-		redirectAttrs.addFlashAttribute(Constants.IS_CREATED,true);
-		return TopicWebUtils.appendPath("redirect:/topic", topicName);
+		if(null != topic && StringUtils.isNotBlank(topic.getTopicName()) && topic.getTopicName().length() > 2){
+			Topic topicResponse = topicService.createTopic(topic);
+			String topicName = topicResponse.getTopicName();
+			redirectAttrs.addFlashAttribute(Constants.TOPIC_NAME, topicName);
+			redirectAttrs.addFlashAttribute(Constants.IS_CREATED,true);
+			return TopicWebUtils.appendPath("redirect:/topic", topicName);
+		}else{
+			throw new TopicException(Constants.TOPIC_CREATION_ERROR);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -53,7 +67,7 @@ public class HomeController {
 					if(StringUtils.isNotBlank(topicName)){
 						messages = getTopicByName(topicName);
 					}else{
-						return "error";
+						throw new TopicException(Constants.TOPIC_REDIRECTION_ERROR);
 					}
 					redirectAttributes.addFlashAttribute(Constants.MESSAGES, messages);
 				}

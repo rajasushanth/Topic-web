@@ -36,9 +36,8 @@
     .topic-message-container{
     overflow-y: auto;
     height:235px; 
-    /*max-width:55%;*/ 
+    max-width:55%; 
     margin: auto;
-    padding-left: 29%;
     }
 	.topic-message:nth-child(odd){
 	/* padding-left: 10%; */
@@ -53,7 +52,7 @@
 	}
 	.topic-message-even{
 	background-color: #F0F8FF;
-	width: 50%;
+	width: 500px;
 	font-family: Montserrat,"Hel	vetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 0.92em;
 	padding-left: 4px;
@@ -66,7 +65,7 @@
 	}
 	.topic-message-odd{
 	background-color: #FFFFF0;
-	width: 50%;
+	width: 500px;
 	font-family: sans-serif;
 	font-size: 0.92em;
 	padding-left: 4px;
@@ -101,19 +100,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/home">Home</a>
-                    </li>
-                     <li>
-                        <a class="page-scroll" href="/home#portfolio">Create</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/home#about">Search</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#topicCreate">Post</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/logout">Logout</a>
+                        <a class="page-scroll" href="/#login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -125,37 +112,55 @@
 
     <!-- Portfolio Grid Section -->
     <section id="topicCreate" class="bg-light-gray">
-        <div class="container">
+        <div class="container" th:if="${null == updateResult}">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading" th:inline="text">
-                    [[${topicName}]]
-                    </h2>
+                    <h2 class="section-heading">Recover Account</h2>
                 </div>
-            </div>
-            <div class="row topic-message-container" style="padding-top: 5px;" th:if="${null != messages}">
-            <div class="col-lg-12 col-xs-12">
-            	<div th:each="message,iter : ${messages}" class="topic-message">
-            		<textarea th:text="${message.message}" rows="2" disabled="disabled" th:class="${iter.index % 2 == 0} ? 'topic-message-even': 'topic-message-odd'"></textarea>
-            		<div class="topic-caption">
-            		<span th:text="${message.commentator} +' | '+ ${#dates.format(message.posted,'h:m a MMM dd yyyy')}"></span>
-            		</div>
-            	</div>
-            	</div>
-            </div>
-            <div class="row" style="padding-top: 90px;" th:if="${null == messages}"></div>
-            <div class="row">
-            <form th:action="@{/topic}" th:method="put">
-            	<input type="hidden" th:value="${topicName}" name="topicName"></input>
-                <div class="col-lg-12 text-center">
-                    <textarea name="firstMessage" rows="4" spellcheck="true" style="border-radius: 5px; resize: none;width: 40%;"></textarea>
-                    <br></br><br></br>
-                <div class="col-lg-12 col-xs-12 text-center">
-                	<button type="submit" class="btn btn-xl" style="padding: 8px 18px;">Post message</button>
-                </div>
-                </div>
+                <div th:if="${null!=question}">
+                <form th:action="'/recover/' + ${username}" method="post">
+					<div class="col-lg-12" align="center">
+					<h3 th:inline="text" class="section-subheading text-muted text-center" style="margin-bottom: 4%; font-size: x-large;">[[${question}]]</h3>
+					</div>
+					<div class="col-lg-12" align="center" style="padding-bottom: 1%;">
+						<div class="col-lg-4"></div>
+						<div class="form-group col-lg-4">
+						<input type="text" class="form-control text-center" id="name" name="answer" placeholder="Recovery answer" style="height: 40px;" required="required"
+										data-validation-required-message="Please enter your answer"/>
+										<p class="help-block text-danger" align="left"></p>
+						</div>
+						<div class="col-lg-4"></div>
+					</div>
+					<div class="col-lg-12" align="center" style="padding-bottom: 3%;">
+						<div class="col-lg-4"></div>
+						<div class="form-group col-lg-4">
+						<input type="password" class="form-control text-center" id="password" name="password" placeholder="New password" style="height: 40px;" required="required"
+										data-validation-required-message="Please enter your password"/>
+										<p class="help-block text-danger" align="left"></p>
+						</div>
+						<div class="col-lg-4"></div>
+					</div>
+					<div class="col-lg-12" align="center" style="padding-bottom: 3%;">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>              
                 </form>
-            </div>
+                </div>
+                <div th:if="${null==question}" >
+                <div class="col-lg-12" align="center" style="margin-bottom: 7%; padding-top: 1%">
+					<h3 class="section-subheading text-muted text-center" style="margin-bottom: 4%; font-size: x-large;">User not found !</h3>
+					</div>
+                </div>
+		</div>
+        </div>
+        <div class="container" th:if="${null != updateResult}">
+        	    <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Recover Account</h2>
+                </div>
+        		<div class="col-lg-12" style="margin-bottom: 7%; padding-top: 1%">
+        			<h3 th:utext="${updateResult}" class="section-subheading text-muted text-center" style="margin-bottom: 4%; font-size: x-large;"></h3>
+        		</div>
+        	</div>
         </div>
     </section>
 
@@ -163,7 +168,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Topic 2017</span>
+                    <span class="copyright">Copyright &copy; Your Website 2016</span>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">

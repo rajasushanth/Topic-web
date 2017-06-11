@@ -36,9 +36,8 @@
     .topic-message-container{
     overflow-y: auto;
     height:235px; 
-    /*max-width:55%;*/ 
+    max-width:55%; 
     margin: auto;
-    padding-left: 29%;
     }
 	.topic-message:nth-child(odd){
 	/* padding-left: 10%; */
@@ -53,7 +52,7 @@
 	}
 	.topic-message-even{
 	background-color: #F0F8FF;
-	width: 50%;
+	width: 500px;
 	font-family: Montserrat,"Hel	vetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 0.92em;
 	padding-left: 4px;
@@ -66,7 +65,7 @@
 	}
 	.topic-message-odd{
 	background-color: #FFFFF0;
-	width: 50%;
+	width: 500px;
 	font-family: sans-serif;
 	font-size: 0.92em;
 	padding-left: 4px;
@@ -101,19 +100,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/home">Home</a>
-                    </li>
-                     <li>
-                        <a class="page-scroll" href="/home#portfolio">Create</a>
+                        <a class="page-scroll" href="/">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="/home#about">Search</a>
+                        <a class="page-scroll" href="/#login">Login</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#topicCreate">Post</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/logout">Logout</a>
+                        <a class="page-scroll" href="/#contact">Sign Up</a>
                     </li>
                 </ul>
             </div>
@@ -129,32 +122,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading" th:inline="text">
-                    [[${topicName}]]
+                    [[${status}]] - [[${error}]]
                     </h2>
+                    <h3 class="section-heading" th:inline="text" style="margin-bottom: 9%;padding-top: 5.5%;color: red;">[[${message}]] !</h3>
                 </div>
-            </div>
-            <div class="row topic-message-container" style="padding-top: 5px;" th:if="${null != messages}">
-            <div class="col-lg-12 col-xs-12">
-            	<div th:each="message,iter : ${messages}" class="topic-message">
-            		<textarea th:text="${message.message}" rows="2" disabled="disabled" th:class="${iter.index % 2 == 0} ? 'topic-message-even': 'topic-message-odd'"></textarea>
-            		<div class="topic-caption">
-            		<span th:text="${message.commentator} +' | '+ ${#dates.format(message.posted,'h:m a MMM dd yyyy')}"></span>
-            		</div>
-            	</div>
-            	</div>
-            </div>
-            <div class="row" style="padding-top: 90px;" th:if="${null == messages}"></div>
-            <div class="row">
-            <form th:action="@{/topic}" th:method="put">
-            	<input type="hidden" th:value="${topicName}" name="topicName"></input>
-                <div class="col-lg-12 text-center">
-                    <textarea name="firstMessage" rows="4" spellcheck="true" style="border-radius: 5px; resize: none;width: 40%;"></textarea>
-                    <br></br><br></br>
-                <div class="col-lg-12 col-xs-12 text-center">
-                	<button type="submit" class="btn btn-xl" style="padding: 8px 18px;">Post message</button>
-                </div>
-                </div>
-                </form>
             </div>
         </div>
     </section>
@@ -186,6 +157,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.min.js"></script>

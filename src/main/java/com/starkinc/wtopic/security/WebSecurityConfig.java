@@ -3,6 +3,7 @@ package com.starkinc.wtopic.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.GET;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/actuator/**").permitAll()
 		.antMatchers(POST, "/login").permitAll()
 		.antMatchers(POST, "/signUp").permitAll()
+		.antMatchers(GET, "/recover").permitAll()
+		.antMatchers(POST, "/recover/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.addFilterBefore(new LoginFilter("/login", authenticationManager()) , UsernamePasswordAuthenticationFilter.class)

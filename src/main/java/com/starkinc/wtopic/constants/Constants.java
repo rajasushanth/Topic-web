@@ -35,6 +35,12 @@ public final class Constants {
 	public static final String TOPIC_DTO = "topicDTO";
 	public static final String SEARCH = "${rest.client.resource.topics.search}";
 	public static final String SEARCH_DTO = "searchDTO";
+	public static final String SUCESSFULL_UPDATE = "Password has been updated, <a href='/#login'>Login</a> with new password";
+	public static final String UNSUCESSFULL_UPDATE = "Update unsuccessful, recovery answer is wrong !!";
+	public static final String UPDATE_RESULT = "updateResult";
+	public static final String EMPTY_PASSWORD = "Update unsuccessful !<br></br>Password should contain alteast 3 characters<br></br>";
+	public static final String TOPIC_CREATION_ERROR = "Topic name should be alteast 3 characters";
+	public static final String TOPIC_REDIRECTION_ERROR = "Unexpected error occured !! Try again later";
 	private Constants(){
 	}
 }
