@@ -31,7 +31,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException, IOException, ServletException {
-		
 		return getAuthenticationManager().authenticate(
 				new UsernamePasswordAuthenticationToken(concatUserPassword(req.getParameter("username"), req.getParameter("password")),
 						Constants.PASSWORD_PLACEHOLDER, Collections.emptyList()));
