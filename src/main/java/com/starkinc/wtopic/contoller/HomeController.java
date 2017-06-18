@@ -34,8 +34,12 @@ public class HomeController {
 	
 	
 	@RequestMapping("/home")
-	public String home(Model model, @RequestParam(required = false) Integer page){
-		TopicsDTO topicsDTO = topicService.getTopicsByAuthor((page==null || page < 1)?1:page);
+	public String home(Model model, @RequestParam(required = false) String page){
+		Integer pageGo = null;
+		try{
+			pageGo = (null != page)?Integer.valueOf(page):null;
+		}catch (NumberFormatException e) {}
+		TopicsDTO topicsDTO = topicService.getTopicsByAuthor((pageGo==null || pageGo < 1)?1:pageGo);
 		model.addAttribute(Constants.TOPIC_DTO, topicsDTO);
 		return "home";
 	}
@@ -82,9 +86,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/topic/search")
 	public String searchTopic(RedirectAttributes redirectAttributes, @RequestParam(required = false) String author,
-			@RequestParam(required = false) String topicName, @RequestParam(required = false) Integer page){
+			@RequestParam(required = false) String topicName, @RequestParam(required = false) String page){
+		Integer pageGo = null;
+		try{
+			pageGo = (null != page)?Integer.valueOf(page):null;
+		}catch (NumberFormatException e) {}
 		SearchDTO searchDTORequest = new SearchDTO(author, topicName);
-		SearchDTO searchDTO = topicService.getTopicsByAuthorAndTopicName(searchDTORequest, page==null?1:page);
+		SearchDTO searchDTO = topicService.getTopicsByAuthorAndTopicName(searchDTORequest, pageGo==null?1:pageGo);
 		redirectAttributes.addFlashAttribute(Constants.SEARCH_DTO, searchDTO);
 		return "redirect:/home";
 	}
