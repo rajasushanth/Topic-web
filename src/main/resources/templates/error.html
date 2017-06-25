@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Topic - Home</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/fonts/Montserrat.css" rel="stylesheet" type="text/css"/>
+    <link href='/fonts/Kaushan.css' rel='stylesheet' type='text/css'/>
+    <link href='/fonts/Droid_Serif.css' rel='stylesheet' type='text/css'/>
+    <link href='/fonts/Roboto_Slab.css' rel='stylesheet' type='text/css'/>
+    
+    <!-- Theme CSS -->
+    <link href="/css/agency.min.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style type="text/css">
+    .topic-message-container{
+    overflow-y: auto;
+    height:235px; 
+    max-width:55%; 
+    margin: auto;
+    }
+	.topic-message:nth-child(odd){
+	/* padding-left: 10%; */
+	}
+	.topic-message:nth-child(even){
+	padding-left: 15%;
+	}
+	.topic-caption{
+	padding-bottom: 16px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.8141em;
+	}
+	.topic-message-even{
+	background-color: #F0F8FF;
+	width: 500px;
+	font-family: Montserrat,"Hel	vetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.92em;
+	padding-left: 4px;
+	padding-top: 2.4px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-radius: 12px;
+	border-top-left-radius: 0px;
+	resize: none;
+	}
+	.topic-message-odd{
+	background-color: #FFFFF0;
+	width: 500px;
+	font-family: sans-serif;
+	font-size: 0.92em;
+	padding-left: 4px;
+	padding-top: 2.4px;
+	padding-bottom: 4px;
+	padding-right: 4px;
+	border-radius: 10px;
+	border-top-right-radius: 0px;
+	resize: none;
+	}
+	</style>  
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top" style="background-color: black;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Topic</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    
+
+    <!-- Portfolio Grid Section -->
+    <section id="topicCreate" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading" th:inline="text">
+                    [[${status}]] - [[${error}]]
+                    </h2>
+                    <h3 class="section-heading" th:inline="text" style="margin-bottom: 9%;padding-top: 5.5%;color: red;">[[${message}]] !</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Topic 2017</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/js/agency.min.js"></script>
+
+</body>
+
+</html>

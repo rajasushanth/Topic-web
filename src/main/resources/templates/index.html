@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Topic</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="fonts/Montserrat.css" rel="stylesheet" type="text/css"/>
+    <link href='fonts/Kaushan.css' rel='stylesheet' type='text/css'/>
+    <link href='fonts/Droid_Serif.css' rel='stylesheet' type='text/css'/>
+    <link href='fonts/Roboto_Slab.css' rel='stylesheet' type='text/css'/>
+    
+    <style type="text/css">
+    a.forgotLink{
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-decoration: none;
+    }
+    
+    </style>
+
+    <!-- Theme CSS -->
+    <link href="css/agency.min.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Topic</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#login">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Developer</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome To Topic!</div>
+                <div class="intro-heading">Start discussing now</div>
+                <a href="#login" class="page-scroll btn btn-xl">Let me in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="login">
+        <div class="container">
+            <div class="row justify-content-center" style="background-image: url('../img/portfolio/login_bg.png'); 
+            background-repeat:no-repeat; background-position:center; padding-bottom: 6%">
+            <br/><br/>
+                    <h2 class="section-heading text-center">Login</h2>
+                     <div class="col-lg-12 col-xs-12 text-center">
+                     <label th:if="${#httpServletRequest != null and #httpServletRequest.getSession().getAttribute('failureMessage') != null}" th:text="${(#httpServletRequest.getSession().getAttribute('failureMessage')).replaceAll('Bad','Invalid').replaceAll('Token','Session')}" class="alert alert-danger" style="text-align: center;">
+                     </label>
+                    <form action="/login" method="post">
+
+						<input type="text" class="form-control" placeholder="Your username" name="username" 
+						required="required" data-validation-required-message="Please enter your username." style="display: inline; width: 30%"/>
+                        <p class="help-block text-danger"></p>
+					
+					
+						<input type="password" class="form-control" placeholder="Your password" name="password" 
+						required="required" data-validation-required-message="Please enter your password" style="display: inline; width: 30%"/>
+                        <p class="help-block text-danger"></p>
+                     	<br/>
+                    	
+                        <div id="success"></div>
+                        <button type="submit" class="btn btn-xl">Login</button>
+                     </form>
+                     <div class="col-lg-12 col-xs-12" style="padding-top: 1%;">
+                     	<a href="#portfolioModal1" class ="forgotLink" data-toggle="modal" style="color: #0000EE; text-decoration: underline;" onmouseover="this.style.color='red'" onmousedown="this.style.color='#0000EE'" onmouseleave="this.style.color='#0000EE'">Forgot Password ?</a>
+                     </div>
+                     </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section -->
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">About</h2>
+                    <h3 class="section-subheading text-muted">Milestones of Topic</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt=""/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>December 2016</h4>
+                                    <h4 class="subheading">Topic is created</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Started off to create a discussion forum to share views on various topics by keeping the design and flow simple, easy and secured.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt=""/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>January 2017</h4>
+                                    <h4 class="subheading">Launch of Topics's UI</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Topic's UI is a created using HTML 5 and bootstrap, to ease on development and clutter free, responsive web pages on all devices.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt=""/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2017</h4>
+                                    <h4 class="subheading">Transition to RESTfull service</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">A two-tier application where Topic web-tier communicates with Topic service-tier using JWT, making it 100% RESTfull.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt=""/>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>April 2017</h4>
+                                    <h4 class="subheading">Strong security</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Topic is backed by Spring security, a strong and powerful framework which authenticates the login in Topic's web-tier and verifies JWT in Topic's service-tier.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>MongoDB
+                                    <br/> is the
+                                    <br/>database</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-light-gray" style="padding: 3%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading" style="margin-bottom: 1%;">Developer</h2>
+                    <h3 class="section-subheading text-muted">A Passionate programmer</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="team-member">
+                        <img src="img/team/sush.jpg" class="img-responsive img-circle" height="220px;" width="220px;" alt=""/>
+                        <h4>Sushanth</h4>
+                        <p class="text-muted">Architect, Lead Developer and UI designer of Topics</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="https://twitter.com/sushanthneozie"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="https://www.facebook.com/sushanth.neozie"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://in.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Sign Up</h2>
+                    <!-- <h3 class="section-subheading text-muted">Join us and share your thoughts.</h3> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" action="/signUp" method="post">
+                        <div class="row">
+                        	<div align="center">
+                        			<label th:if="${signUpError != null}" th:text="${signUpError}" class="alert alert-danger" style="text-align: center;"></label>
+                        		</div>
+                        	<div class="col-md-6">
+                                <div class="form-group" align="center">
+                                    <input type="text" class="form-control" placeholder="Username" name="username" id="name" required="required" data-validation-required-message="Please enter your name." style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
+                                </div>
+                                <div class="form-group" align="center">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required="required" data-validation-required-message="Please enter your password." style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="form-group" align="center">
+                                    <input type="text" class="form-control" placeholder="Recovery question" name="question" id="question" required="required" data-validation-required-message="Please enter your question" style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
+                                </div>
+                                <div class="form-group" align="center">
+                                    <input type="text" class="form-control" placeholder="Answer" id="answer" name="answer" required="required" data-validation-required-message="Please enter your awswer" style="height: 60px;"/>
+                                    <p class="help-block text-danger" align="left"></p>
+                                </div>
+                            <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-xs-12 text-center">
+                    	<div id="success"></div>
+                    		<button type="submit" class="btn btn-xl" style="height: 30%;">Sign Up</button>
+						</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Topic 2017</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- Portfolio Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2>Reset Password</h2>
+                                <form action="/recover" method="get">
+                                <div class="col-lg-12" align="center" style="padding-top: 5%;">
+                                	<input type="text" class="form-control" placeholder="Username" name="username" required="required"
+										data-validation-required-message="Please enter your topic name" style="width: 25%;" />
+								</div>
+								<div class="col-lg-12" align="center" style="padding-top: 2%;">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/agency.min.js"></script>
+    <script src="js/scrollview.js"></script>
+     
+    <script type="text/javascript" th:if="${#httpServletRequest != null and #httpServletRequest.getSession().getAttribute('failureMessage') != null}">
+    $(document).ready(function(){
+    	$('#login').scrollView();
+    });
+    </script>
+    <script type="text/javascript" th:if="${signUpError != null}">
+    $(document).ready(function(){
+    	$('#contact').scrollView();
+    });
+    </script>
+	 <label th:if="${#httpServletRequest != null and #httpServletRequest.getSession().getAttribute('failureMessage') != null}" th:text="${#httpServletRequest.getSession().invalidate()}">
+     </label>
+</body>
+
+</html>
