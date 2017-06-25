@@ -20,12 +20,12 @@ import com.starkinc.wtopic.dto.ResetPasswordDTO;
 import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.exception.SignUpException;
 import com.starkinc.wtopic.service.RecoverAccountService;
-import com.starkinc.wtopic.serviceImpl.SignUpServiceImpl;;
+import com.starkinc.wtopic.service.SignUpService;;
 
 @Controller
 public class IndexContoller {
 	
-	private SignUpServiceImpl signUpServiceImpl;
+	private SignUpService signUpService;
 	private RecoverAccountService recoverAccountService;
 		
 	@RequestMapping("/")
@@ -57,13 +57,13 @@ public class IndexContoller {
 	
 	@RequestMapping(value = "/signUp", method = POST)
 	public String signUp(TopicUser user, HttpServletRequest request, RedirectAttributes redirectAttrs){
-		signUpServiceImpl.signUp(user);
+		signUpService.signUp(user);
 		return "redirect:/home";
 	}
 	
 	@Autowired
-	public void setSignUpServiceImpl(SignUpServiceImpl signUpServiceImpl) {
-		this.signUpServiceImpl = signUpServiceImpl;
+	public void setsignUpService(SignUpService signUpService) {
+		this.signUpService = signUpService;
 	}
 	
 	@Autowired

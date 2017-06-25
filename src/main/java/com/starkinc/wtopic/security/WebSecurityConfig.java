@@ -8,17 +8,18 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private LoginDetailsService loginDetailsService;
+	private UserDetailsService userDetailsService;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(loginDetailsService);
+		auth.userDetailsService(userDetailsService);
 		
 	}
 
@@ -42,8 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Autowired
-	public void setLoginDetailsService(LoginDetailsService loginDetailsService) {
-		this.loginDetailsService = loginDetailsService;
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
 	}
 
 }

@@ -43,7 +43,7 @@ public class LoginDetailsService implements UserDetailsService {
 		if(statusCode == OK){
 			List<String> authorizationList = headers.get("Authorization");
 			String token = null != authorizationList ? authorizationList.get(0) : null;
-			System.out.println(token);
+			//System.out.println(token);
 			TopicWebUtils.bindUserSession(username, token);
 			return new User(username, Constants.PASSWORD_PLACEHOLDER, true, true, true, true, authorities);
 		}else if(statusCode == UNAUTHORIZED){

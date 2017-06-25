@@ -99,7 +99,7 @@
             <br/><br/>
                     <h2 class="section-heading text-center">Login</h2>
                      <div class="col-lg-12 col-xs-12 text-center">
-                     <label th:if="${#httpServletRequest != null and #httpServletRequest.getSession().getAttribute('failureMessage') != null}" th:text="${(#httpServletRequest.getSession().getAttribute('failureMessage')).replaceAll('Bad','Invalid')}" class="alert alert-danger" style="text-align: center;">
+                     <label th:if="${#httpServletRequest != null and #httpServletRequest.getSession().getAttribute('failureMessage') != null}" th:text="${(#httpServletRequest.getSession().getAttribute('failureMessage')).replaceAll('Bad','Invalid').replaceAll('Token','Session')}" class="alert alert-danger" style="text-align: center;">
                      </label>
                     <form action="/login" method="post">
 

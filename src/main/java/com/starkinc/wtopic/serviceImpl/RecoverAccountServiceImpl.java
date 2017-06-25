@@ -1,7 +1,8 @@
 package com.starkinc.wtopic.serviceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpStatus.FOUND;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;

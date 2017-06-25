@@ -41,6 +41,7 @@ public final class Constants {
 	public static final String EMPTY_PASSWORD = "Update unsuccessful !<br></br>Password should contain alteast 3 characters<br></br>";
 	public static final String TOPIC_CREATION_ERROR = "Topic name should be alteast 3 characters";
 	public static final String TOPIC_REDIRECTION_ERROR = "Unexpected error occured !! Try again later";
+	public static final String REFRESHED_TOKEN = "REFRESHED_TOKEN";
 	private Constants(){
 	}
 }
