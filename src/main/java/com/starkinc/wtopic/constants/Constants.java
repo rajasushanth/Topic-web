@@ -11,7 +11,7 @@ public final class Constants {
 	public static final String SUCCESS = "success";
 	public static final String ERROR = "error";
 	
-	public static final String SALT = "${salt}";
+	public static final String SALT = "${salt.key}";
 	public static final String SECRECT_KEY = "${secret.key}";
 	public static final String TILT = "~";
 	public static final String PASSWORD_PLACEHOLDER = "SIUAKJ5365";
