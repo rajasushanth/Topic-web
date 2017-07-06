@@ -1,6 +1,6 @@
 # Topic Web
 
-Topic web is the presentation layer built using boostrap and Thymeleaf - a powerful templating engine with default support for Spring framework. It consumes the REST API exposed by Topic Service and authenticated via JWT tokens.
+Topic web is the presentation layer for Topic application built using boostrap and Thymeleaf - a powerful templating engine with default support for Spring framework. It consumes the REST API exposed by Topic Service and authenticated via JWT tokens.
 
 ## Getting Started
 
