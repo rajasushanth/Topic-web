@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+# Topic Web
 
-You can use the [editor on GitHub](https://github.com/rajasushanth/topic-web/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Topic web is the presentation layer built using boostrap and Thymeleaf - a powerful templating engine with default support for Spring framework. It consumes the REST API exposed by Topic Service and authenticated via JWT tokens.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Getting Started
 
-### Markdown
+Clone the repository to your local by executing the command in git bash.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```git clone https://github.com/rajasushanth/Topic-web.git```
 
-```markdown
-Syntax highlighted code block
+## Prerequisites
 
-# Header 1
-## Header 2
-### Header 3
+* JDK v1.8 or above
+* Maven v3.0.5 or above
 
-- Bulleted
-- List
+## Installing
 
-1. Numbered
-2. List
+1. Verify following conditions are met
+* [Topic Config](https://github.com/rajasushanth/topic-config.git) service running
+* [Topic Service](https://github.com/rajasushanth/Topic-service.git) service running
+2. Navigate to the project root where pom.xml resides
+3. Built the WAR module by executing ```mvn clean install```
 
-**Bold** and _Italic_ and `Code` text
+## Deployment 
+**Running it in local**
 
-[Link](url) and ![Image](src)
-```
+1. Navigate tho the path where WAR build resides
+2. Execute the command in the command line
+```java -jar topic-web-0.0.1-SNAPSHOT.jar```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+**Running in [Pivotal cloud foundry](https://login.run.pivotal.io/login)**
+1. Create an account in PCF
+2. Install the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+3. Get the [manifest.yml](https://github.com/rajasushanth/topic-manifest/blob/master/topic-service/manifest.yml)
+4. Execute the command ```cf push```
 
-### Jekyll Themes
+## Author
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rajasushanth/topic-web/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+* **RajaSushanth** - [GitHub RajaSushanth](https://github.com/rajasushanth)
