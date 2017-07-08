@@ -16,8 +16,8 @@ Clone the repository to your local by executing the command in git bash.
 ## Installing
 
 1. Verify following conditions are met
-* [Topic Config](https://github.com/rajasushanth/Topic-config.git) service running
-* [Topic Service](https://github.com/rajasushanth/Topic-service.git) service running
+* [Topic Config](https://rajasushanth.github.io/Topic-config/) service running
+* [Topic Service](https://rajasushanth.github.io/Topic-service/) service running
 2. Navigate to the project root where pom.xml resides
 3. Built the WAR module by executing ```mvn clean install```
 
