@@ -22,6 +22,10 @@ import com.starkinc.wtopic.exception.ClientResponseException;
 import com.starkinc.wtopic.exception.SessionExpiredException;
 import com.starkinc.wtopic.util.TopicWebUtils;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Aspect
 @Component
 public class TopicClientAspect {

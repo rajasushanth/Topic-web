@@ -11,6 +11,10 @@ import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.exception.ClientResponseException;
 import com.starkinc.wtopic.exception.SignUpException;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class SignUpClient {
 

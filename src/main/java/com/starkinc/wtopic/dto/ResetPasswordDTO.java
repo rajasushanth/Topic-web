@@ -1,5 +1,9 @@
 package com.starkinc.wtopic.dto;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class ResetPasswordDTO {
 	
 	private String answer;

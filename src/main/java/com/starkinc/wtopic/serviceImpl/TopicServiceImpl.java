@@ -14,6 +14,10 @@ import com.starkinc.wtopic.entity.Topic;
 import com.starkinc.wtopic.restClient.TopicClient;
 import com.starkinc.wtopic.service.TopicService;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class TopicServiceImpl implements TopicService {
 	

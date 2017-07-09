@@ -4,6 +4,10 @@ import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientResponseException extends RuntimeException {
 

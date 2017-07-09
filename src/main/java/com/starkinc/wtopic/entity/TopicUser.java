@@ -1,5 +1,9 @@
 package com.starkinc.wtopic.entity;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class TopicUser {
 	
 	private String username;

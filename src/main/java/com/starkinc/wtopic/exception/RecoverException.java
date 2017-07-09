@@ -1,5 +1,9 @@
 package com.starkinc.wtopic.exception;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class RecoverException extends ClientResponseException {
 
 	/**

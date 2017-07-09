@@ -11,6 +11,10 @@ import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.exception.ClientResponseException;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class LoginClient {
 	

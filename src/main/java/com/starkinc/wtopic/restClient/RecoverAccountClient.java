@@ -13,6 +13,10 @@ import com.starkinc.wtopic.exception.ClientResponseException;
 import com.starkinc.wtopic.exception.RecoverException;
 import com.starkinc.wtopic.util.TopicWebUtils;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class RecoverAccountClient {
 

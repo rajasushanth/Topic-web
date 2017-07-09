@@ -9,6 +9,10 @@ import org.springframework.web.client.ResponseErrorHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class CustomResponseErrorHandler implements ResponseErrorHandler {
 	
 	private ResponseErrorHandler responseErrorHandler = new DefaultResponseErrorHandler();

@@ -2,6 +2,10 @@ package com.starkinc.wtopic.entity;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class Error {
 	private HttpStatus code;
 	private String message;

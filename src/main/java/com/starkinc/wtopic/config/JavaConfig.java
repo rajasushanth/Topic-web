@@ -16,6 +16,10 @@ import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.exception.CustomResponseErrorHandler;
 import com.starkinc.wtopic.interceptor.HeaderRequestInterceptor;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Configuration
 public class JavaConfig {
 	

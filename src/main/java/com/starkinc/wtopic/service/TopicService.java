@@ -4,6 +4,10 @@ import com.starkinc.wtopic.dto.SearchDTO;
 import com.starkinc.wtopic.dto.TopicsDTO;
 import com.starkinc.wtopic.entity.Topic;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public interface TopicService {
 	
 	public Topic createTopic(Topic topic);

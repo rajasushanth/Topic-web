@@ -11,6 +11,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.dto.UserSession;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public abstract class TopicWebUtils {
 
 	public static HttpServletRequest getRequest() {

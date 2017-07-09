@@ -12,6 +12,10 @@ import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.restClient.RecoverAccountClient;
 import com.starkinc.wtopic.service.RecoverAccountService;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class RecoverAccountServiceImpl implements RecoverAccountService {
 	

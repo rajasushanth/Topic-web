@@ -23,6 +23,10 @@ import com.starkinc.wtopic.entity.TopicUser;
 import com.starkinc.wtopic.restClient.LoginClient;
 import com.starkinc.wtopic.util.TopicWebUtils;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class LoginDetailsService implements UserDetailsService {
 	

@@ -19,6 +19,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.starkinc.wtopic.constants.Constants;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

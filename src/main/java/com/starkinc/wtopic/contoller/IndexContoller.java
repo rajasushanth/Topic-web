@@ -22,6 +22,10 @@ import com.starkinc.wtopic.exception.SignUpException;
 import com.starkinc.wtopic.service.RecoverAccountService;
 import com.starkinc.wtopic.service.SignUpService;;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Controller
 public class IndexContoller {
 	

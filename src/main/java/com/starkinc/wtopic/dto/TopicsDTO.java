@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.starkinc.wtopic.entity.Topic;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class TopicsDTO {
 	
 	private List<Topic> topics;

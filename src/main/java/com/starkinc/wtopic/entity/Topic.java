@@ -5,6 +5,10 @@ import java.util.List;
 
 import com.starkinc.wtopic.entity.Message;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class Topic {
 
 	private String topicName;

@@ -1,5 +1,9 @@
 package com.starkinc.wtopic.dto;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class UserSession {
 	
 	private String token;

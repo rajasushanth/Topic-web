@@ -1,5 +1,9 @@
 package com.starkinc.wtopic.constants;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public final class Constants {
 	
 	public static final String BASE_URL = "${rest.client.url.base}";

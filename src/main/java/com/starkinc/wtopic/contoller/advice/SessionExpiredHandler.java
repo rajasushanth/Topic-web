@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.starkinc.wtopic.exception.SessionExpiredException;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @ControllerAdvice
 public class SessionExpiredHandler {
 	

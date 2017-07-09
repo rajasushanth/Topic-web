@@ -14,6 +14,10 @@ import com.starkinc.wtopic.restClient.SignUpClient;
 import com.starkinc.wtopic.service.SignUpService;
 import com.starkinc.wtopic.util.TopicWebUtils;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 @Service
 public class SignUpServiceImpl implements SignUpService {
 	

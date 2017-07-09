@@ -11,6 +11,10 @@ import org.springframework.security.core.Authentication;
 import com.starkinc.wtopic.constants.Constants;
 import com.starkinc.wtopic.dto.UserSession;
 
+/**
+ * @author RajaSushanth
+ *
+ */
 public class AuthenticationService {
 
 	public static Authentication getAuthentication(HttpServletRequest req) {
